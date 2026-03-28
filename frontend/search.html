@@ -124,10 +124,51 @@
         transform: translate(-50%, -50%);
         cursor: pointer;
         box-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
+        transition: box-shadow 0.2s ease;
+      }
+      .dual-range-slider .thumb:hover {
+        box-shadow: 0 0 16px rgba(234, 179, 8, 0.6);
+      }
+      .dual-range-slider .thumb:active {
+        box-shadow: 0 0 20px rgba(234, 179, 8, 0.8);
+      }
+      
+      .language-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-top: 0.5rem;
+        max-height: 200px;
+        overflow-y: auto;
+        background: rgba(2, 12, 27, 0.95);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(234, 179, 8, 0.2);
+        border-radius: 0.75rem;
+        z-index: 50;
+        display: none;
+      }
+      .language-dropdown.show {
+        display: block;
+      }
+      .language-option {
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        font-size: 0.875rem;
+        color: #ccd6f6;
+      }
+      .language-option:hover {
+        background: rgba(234, 179, 8, 0.1);
+        color: #eab308;
+      }
+      .language-option.selected {
+        background: rgba(234, 179, 8, 0.15);
+        color: #eab308;
       }
     </style>
 </head>
-<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col overflow-hidden">
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col">
 <!-- TopNavBar -->
 <div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
 <nav class="nav-capsule flex justify-between items-center px-8 py-2.5 w-full max-w-4xl rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
@@ -150,19 +191,19 @@
 </nav>
 </div>
 <!-- Main Content Area -->
-<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6 relative overflow-hidden aspect-[16/10]">
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6 relative overflow-visible">
 <!-- Abstract Background Glows -->
 <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
 <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
 <!-- Central Search Card -->
 <div class="w-full max-w-3xl liquid-glass rounded-[2rem] p-8 md:p-10 relative z-10 shadow-2xl">
 <button class="absolute top-6 left-6 material-symbols-outlined text-on-surface-variant hover:text-white transition-colors cursor-pointer">close</button>
-<form class="space-y-8 mt-4">
+<form class="space-y-8 mt-4" id="search-form">
 <!-- Row 1: City and Case Type -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 <div class="space-y-2">
 <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">City:</label>
-<input class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
+<input class="w-full liquid-input rounded-xl py-3 px-4 text-black font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
 </div>
 <div class="space-y-2">
 <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">Case Type:</label>
@@ -179,9 +220,20 @@
 </div>
 <!-- Row 2: Price (Dual-node slider) -->
 <div class="space-y-4">
-<div class="flex justify-between items-center">
+<div class="flex justify-between items-center mb-4">
 <label class="font-headline font-bold text-sm text-white">Price:</label>
-<span class="text-primary font-label text-[10px] tracking-widest uppercase">$250 — $850+ / hr</span>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="text-slate-500 text-xs">$</span>
+<input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-black text-xs text-center focus:outline-none" id="price-min-input" min="50" max="1000" type="number" value="250"/>
+</div>
+<span class="text-slate-500 text-xs">—</span>
+<div class="flex items-center gap-2">
+<span class="text-slate-500 text-xs">$</span>
+<input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-black text-xs text-center focus:outline-none" id="price-max-input" min="50" max="1000" type="number" value="850"/>
+</div>
+<span class="text-slate-500 text-[10px]">/ hr</span>
+</div>
 </div>
 <div class="px-2 py-4">
 <div class="dual-range-slider">
@@ -192,15 +244,14 @@
 </div>
 </div>
 <!-- Row 3: Languages (Multi-select) -->
-<div class="space-y-2">
+<div class="space-y-2 relative">
 <label class="block font-headline font-bold text-sm text-white">Languages:</label>
-<div class="w-full liquid-input rounded-xl p-2 flex flex-wrap gap-2 items-center min-h-[50px]">
-<div class="bg-primary/20 border border-primary/30 text-primary px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-<span class="material-symbols-outlined text-xs">close</span>
-                        Español
-                    </div>
-<input class="bg-transparent border-none focus:ring-0 text-white font-body text-sm flex-grow placeholder:text-outline/30" placeholder="Add language..." type="text"/>
-<span class="material-symbols-outlined text-on-surface-variant ml-auto mr-2">expand_more</span>
+<div class="w-full liquid-input rounded-xl p-2 flex flex-wrap gap-2 items-center min-h-[50px] cursor-text" id="language-container">
+<input class="bg-transparent border-none focus:ring-0 text-white font-body text-sm flex-grow placeholder:text-outline/30 min-w-[120px] focus:outline-none" id="language-input" placeholder="Type or select languages..." type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant ml-auto mr-2 cursor-pointer select-none" id="language-dropdown-toggle">expand_more</span>
+</div>
+<div class="language-dropdown" id="language-dropdown">
+<!-- Options will be populated by JavaScript -->
 </div>
 </div>
 <!-- Row 4: Case Description -->
@@ -241,4 +292,297 @@
         </div>
 </div>
 </footer>
+<script>
+// Prevent form submission on Enter key (except when clicking Search button)
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('search-form');
+  
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Handle search logic here when Search button is clicked
+    console.log('Search submitted');
+  });
+  
+  // Prevent Enter key from submitting form in input fields
+  form.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.type !== 'submit') {
+      e.preventDefault();
+    }
+  });
+});
+
+// Dual Range Slider Implementation
+document.addEventListener('DOMContentLoaded', () => {
+  const slider = document.querySelector('.dual-range-slider');
+  const trackFill = slider.querySelector('.track-fill');
+  const thumbs = slider.querySelectorAll('.thumb');
+  const minInput = document.getElementById('price-min-input');
+  const maxInput = document.getElementById('price-max-input');
+  
+  // Price range configuration (in dollars per hour)
+  const MIN_PRICE = 50;
+  const MAX_PRICE = 1000;
+  const MIN_RANGE = 25; // Minimum difference between min and max must be at least $25
+  
+  let minPrice = 250; // Initial min price
+  let maxPrice = 850; // Initial max price
+  let activeThumb = null;
+  
+  function priceToPercent(price) {
+    return ((price - MIN_PRICE) / (MAX_PRICE - MIN_PRICE)) * 100;
+  }
+  
+  function percentToPrice(percent) {
+    return Math.round(MIN_PRICE + (percent / 100) * (MAX_PRICE - MIN_PRICE));
+  }
+  
+  function updateDisplay() {
+    // Clamp prices to valid range
+    minPrice = Math.max(MIN_PRICE, Math.min(MAX_PRICE - MIN_RANGE, minPrice));
+    maxPrice = Math.max(minPrice + MIN_RANGE, Math.min(MAX_PRICE, maxPrice));
+    
+    const minPercent = priceToPercent(minPrice);
+    const maxPercent = priceToPercent(maxPrice);
+    
+    trackFill.style.left = `${minPercent}%`;
+    trackFill.style.right = `${100 - maxPercent}%`;
+    
+    thumbs[0].style.left = `${minPercent}%`;
+    thumbs[1].style.left = `${maxPercent}%`;
+    
+    minInput.value = minPrice;
+    maxInput.value = maxPrice;
+  }
+  
+  function onMouseMove(e) {
+    if (!activeThumb) return;
+    
+    const rect = slider.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    let percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    let price = percentToPrice(percent);
+    
+    if (activeThumb === thumbs[0]) {
+      // Left thumb (min) - can't go past right thumb minus MIN_RANGE
+      minPrice = Math.min(price, maxPrice - MIN_RANGE);
+    } else {
+      // Right thumb (max) - can't go before left thumb plus MIN_RANGE
+      maxPrice = Math.max(price, minPrice + MIN_RANGE);
+    }
+    
+    updateDisplay();
+  }
+  
+  function onMouseUp() {
+    activeThumb = null;
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  }
+  
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      activeThumb = thumb;
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    });
+  });
+  
+  // Handle manual input changes
+  minInput.addEventListener('change', () => {
+    let value = parseInt(minInput.value) || MIN_PRICE;
+    minPrice = Math.max(MIN_PRICE, Math.min(value, maxPrice - MIN_RANGE));
+    updateDisplay();
+  });
+  
+  maxInput.addEventListener('change', () => {
+    let value = parseInt(maxInput.value) || MAX_PRICE;
+    maxPrice = Math.min(MAX_PRICE, Math.max(value, minPrice + MIN_RANGE));
+    updateDisplay();
+  });
+  
+  // Prevent invalid characters in number inputs
+  [minInput, maxInput].forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (!/[0-9]/.test(e.key) && e.key !== 'Enter' && e.key !== 'Backspace') {
+        e.preventDefault();
+      }
+    });
+  });
+  
+  // Touch support for mobile
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      activeThumb = thumb;
+    });
+  });
+  
+  document.addEventListener('touchmove', (e) => {
+    if (!activeThumb) return;
+    const touch = e.touches[0];
+    const rect = slider.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    let percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    let price = percentToPrice(percent);
+    
+    if (activeThumb === thumbs[0]) {
+      minPrice = Math.min(price, maxPrice - MIN_RANGE);
+    } else {
+      maxPrice = Math.max(price, minPrice + MIN_RANGE);
+    }
+    
+    updateDisplay();
+  });
+  
+  document.addEventListener('touchend', () => {
+    activeThumb = null;
+  });
+  
+  // Initialize display
+  updateDisplay();
+});
+
+// Language Multi-Select with Dropdown
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('language-container');
+  const input = document.getElementById('language-input');
+  const dropdown = document.getElementById('language-dropdown');
+  const dropdownToggle = document.getElementById('language-dropdown-toggle');
+  
+  // Common languages spoken in Texas legal practice
+  const availableLanguages = [
+    'English', 'Spanish', 'Mandarin', 'Vietnamese', 'French', 'Arabic', 
+    'Korean', 'German', 'Hindi', 'Urdu', 'Portuguese', 'Japanese', 
+    'Italian', 'Russian', 'Polish', 'Tagalog', 'Thai', 'Farsi'
+  ];
+  
+  const selectedLanguages = new Set();
+  
+  function createLanguageTag(language) {
+    const tag = document.createElement('div');
+    tag.className = 'bg-primary/20 border border-primary/30 text-primary px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 transition-all hover:bg-primary/30';
+    tag.innerHTML = `
+      <span class="material-symbols-outlined text-xs cursor-pointer hover:text-white">close</span>
+      ${language}
+    `;
+    
+    tag.querySelector('.material-symbols-outlined').addEventListener('click', () => {
+      selectedLanguages.delete(language);
+      tag.remove();
+      renderDropdown();
+    });
+    
+    return tag;
+  }
+  
+  function renderDropdown(filter = '') {
+    dropdown.innerHTML = '';
+    const lowerFilter = filter.toLowerCase();
+    
+    const filtered = availableLanguages.filter(lang => 
+      !selectedLanguages.has(lang) && 
+      lang.toLowerCase().includes(lowerFilter)
+    );
+    
+    if (filtered.length === 0) {
+      dropdown.innerHTML = '<div class="language-option" style="cursor: default; color: #8892b0;">No matches found</div>';
+      return;
+    }
+    
+    filtered.forEach(lang => {
+      const option = document.createElement('div');
+      option.className = 'language-option';
+      option.textContent = lang;
+      option.addEventListener('click', () => {
+        addLanguage(lang);
+      });
+      dropdown.appendChild(option);
+    });
+  }
+  
+  function addLanguage(language) {
+    if (selectedLanguages.has(language)) return;
+    
+    selectedLanguages.add(language);
+    const tag = createLanguageTag(language);
+    container.insertBefore(tag, input);
+    input.value = '';
+    renderDropdown();
+    hideDropdown();
+  }
+  
+  function showDropdown() {
+    dropdown.classList.add('show');
+    dropdownToggle.style.transform = 'rotate(180deg)';
+  }
+  
+  function hideDropdown() {
+    dropdown.classList.remove('show');
+    dropdownToggle.style.transform = 'rotate(0deg)';
+  }
+  
+  // Toggle dropdown on arrow click
+  dropdownToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (dropdown.classList.contains('show')) {
+      hideDropdown();
+    } else {
+      renderDropdown(input.value);
+      showDropdown();
+    }
+  });
+  
+  // Show dropdown on input focus
+  input.addEventListener('focus', () => {
+    renderDropdown(input.value);
+    showDropdown();
+  });
+  
+  // Filter dropdown as user types
+  input.addEventListener('input', () => {
+    renderDropdown(input.value);
+    if (!dropdown.classList.contains('show')) {
+      showDropdown();
+    }
+  });
+  
+  // Add language on Enter key
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (value) {
+        // Check if exact match exists in available languages
+        const exactMatch = availableLanguages.find(
+          lang => lang.toLowerCase() === value.toLowerCase()
+        );
+        if (exactMatch) {
+          addLanguage(exactMatch);
+        } else {
+          // Add custom language with proper capitalization
+          const customLang = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+          availableLanguages.push(customLang);
+          addLanguage(customLang);
+        }
+      }
+    }
+  });
+  
+  // Click container to focus input
+  container.addEventListener('click', () => {
+    input.focus();
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target) && !dropdown.contains(e.target)) {
+      hideDropdown();
+    }
+  });
+  
+  // Initialize with empty dropdown
+  renderDropdown();
+});
+</script>
 </body></html>
