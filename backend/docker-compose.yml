@@ -11,6 +11,9 @@ services:
     environment:
       - "N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES=false"
       - "N8N_RESTRICT_FILE_ACCESS_TO=/data/shared"
+      # Since n8n requires credentials (this is for a hackathon, so security really doesn't matter):
+      # Email: hackathon@build4good.com
+      # Password: Building4Good
 
   browserless:
     image: browserless/chrome:latest

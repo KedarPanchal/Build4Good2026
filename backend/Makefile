@@ -9,8 +9,7 @@ build:
 	docker compose build --no-cache
 
 open:
-	sleep 5
-	open http://localhost:5678
+	sleep 5 && open http://localhost:5678
 
 down:
 	docker compose down
