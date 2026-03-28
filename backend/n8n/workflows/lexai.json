@@ -1,5 +1,5 @@
 {
-  "name": "My workflow",
+  "name": "LexAI",
   "nodes": [
     {
       "parameters": {
@@ -33,7 +33,8 @@
     },
     {
       "parameters": {
-        "respondWith": "noData",
+        "respondWith": "json",
+        "responseBody": "{\n  \"message\": \"Invalid input\"\n}",
         "options": {
           "responseCode": 400
         }
@@ -84,7 +85,8 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=You are a search agent whose purpose is to find lawyers only in Texas that match specific criteria and can help with a case that will be specified below. Attempt to find lawyers that only match the specified criteria and have expertise in the case description, and deviate slightly from the criteria only if few options for lawyers are available.\n\nThe case description is:\n{{ $json.description }}\n\nThe criteria are:\n\nMinimum Price (fees included): {{ $json.priceLow }}\nMaximum Price (fees included): {{ $json.priceHigh }}\nCity: {{ $json.city }}\nCase Type: {{ $json.caseType }}\nLanguages: {{ $json.languages.join(\", \") }}\nDisability Focused: {{ $json.disabilityFocused ? \"Yes\" : \"No\" }}",
+        "text": "=You are a search agent whose purpose is to find lawyers only in Texas that match specific criteria and can help with a case specified below. Find lawyers that match the specified criteria and have expertise in the case description. Only deviate from the criteria if fewer than 3 matching lawyers are found — if deviating, prioritize price range over location and note the deviation in the lawyer's description.\n\nFor each lawyer you find, write a description based only on verifiable information found via search, covering their specialization, case history, and strengths. If limited information is available, focus on their listed specializations and case types. Do not fabricate or infer details not found in search results. You MUST use the search tool to find real lawyers. Do not rely on your training data or make up any lawyer details. Every lawyer you return must be found via a search tool call.\n\nKeep all search queries short and plain, under 10 words. Never use quotes, parentheses, or special characters in search queries. Make no more than 5 search calls total. After your searches, compile the results and return the JSON immediately. Do not search more than necessary. For each lawyer, make only one search call. Do not make follow-up verification searches.\n\nThe case description is:\n{{ $json.description }}\n\nThe criteria are:\nMinimum Price (hourly rate in USD, fees included): {{ $json.priceLow }}\nMaximum Price (hourly rate in USD, fees included): {{ $json.priceHigh }}\nCity: {{ $json.city }}\nCase Type: {{ $json.caseType }}\nLanguages: {{ $json.languages.join(\", \") }}\nDisability Focused: {{ $json.disabilityFocused ? \"Yes\" : \"No\" }}\n\nReturn your response as a JSON object with a single \"lawyers\" array. Each lawyer must have exactly the following fields:\n- name (string)\n- cost (integer, hourly rate in USD)\n- location (string)\n- years_of_experience (integer)\n- email (string)\n- phone (integer)\n- website (string)\n- description (string)\n\nReturn nothing else — no explanation, no markdown, just the raw JSON object. Do not wrap your response in markdown code blocks. Return only the raw JSON object.",
+        "hasOutputParser": true,
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -94,11 +96,44 @@
         -192
       ],
       "id": "2bc67b32-2b0e-4778-a605-e7827df0c78e",
-      "name": "AI Agent"
+      "name": "AI Agent",
+      "retryOnFail": true
     },
     {
       "parameters": {
-        "model": "minimax/minimax-m2.5:free",
+        "jsonSchemaExample": "{\n  \"lawyers\": [\n    {\n      \"name\": \"Margaret Chen\",\n      \"cost\": 350,\n      \"location\": \"Austin\",\n      \"years_of_experience\": 14,\n      \"email\": \"mchen@chenlaw.com\",\n      \"phone\": 5122348901,\n      \"website\": \"chenlawaustin.com\",\n      \"description\": \"Margaret specializes in employment discrimination and wrongful termination cases, bringing over a decade of experience fighting for workers' rights against corporate misconduct. She has secured over $12M in settlements for her clients and is known for her aggressive negotiation style and personalized approach to each case.\"\n    },\n    {\n      \"name\": \"David Okafor\",\n      \"cost\": 500,\n      \"location\": \"Austin\",\n      \"years_of_experience\": 20,\n      \"email\": \"dokafor@okaforinjury.com\",\n      \"phone\": 5129874532,\n      \"website\": \"okaforinjury.com\",\n      \"description\": \"David is a board-certified personal injury attorney with two decades of courtroom experience. He focuses on catastrophic injury and medical malpractice cases, and has won landmark verdicts that have shaped Texas tort law. His firm operates on a contingency basis — you pay nothing unless he wins.\"\n    },\n    {\n      \"name\": \"Sofia Reyes\",\n      \"cost\": 200,\n      \"location\": \"Austin\",\n      \"years_of_experience\": 6,\n      \"email\": \"sreyes@reyesfamilylaw.com\",\n      \"phone\": 5124561238,\n      \"website\": \"reyesfamilylaw.com\",\n      \"description\": \"Sofia is a bilingual family law attorney fluent in English and Spanish, dedicated to helping families navigate divorce, custody, and immigration-related legal challenges. Her affordable rates and compassionate approach make quality legal representation accessible to underserved communities across Travis County.\"\n    }\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        768,
+        32
+      ],
+      "id": "3e959bcf-5594-43f7-8090-1599778d449b",
+      "name": "Parser"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Performs an internet search.",
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"api_key\": \"{{ $env.TAVILY_API_KEY }}\",\n  \"query\": \"{{ $fromAI('query', 'Search query') }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        736,
+        -336
+      ],
+      "id": "9cc73728-145c-4340-b39d-94c11e8f15a0",
+      "name": "Tavily"
+    },
+    {
+      "parameters": {
+        "model": "arcee-ai/trinity-large-preview:free",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
@@ -107,7 +142,7 @@
         624,
         -336
       ],
-      "id": "74cf73ad-0a4f-43d0-bbfb-fbe144ccd21e",
+      "id": "99dd8d51-4f8e-4c27-b900-3289101c8410",
       "name": "OpenRouter Chat Model",
       "credentials": {
         "openRouterApi": {
@@ -118,22 +153,20 @@
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
-      "typeVersion": 1,
-      "position": [
-        768,
-        -336
-      ],
-      "id": "2308b47e-dd5d-4806-b25c-5548351f8c88",
-      "name": "Search in Tavily",
-      "credentials": {
-        "tavilyApi": {
-          "id": "r2qhQ5v8Om9YvOxl",
-          "name": "Tavily account"
+        "respondWith": "json",
+        "responseBody": "={{ $json.output.lawyers }}",
+        "options": {
+          "responseCode": 200
         }
-      }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        976,
+        -192
+      ],
+      "id": "401d6ccf-aae0-4607-a174-d31b5b34fd03",
+      "name": "Actual Response"
     }
   ],
   "pinData": {},
@@ -178,23 +211,45 @@
         ]
       ]
     },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Actual Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "OpenRouter Chat Model": {
       "ai_languageModel": [
         [
           {
             "node": "AI Agent",
             "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Search in Tavily": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -206,7 +261,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "0ce4dc21-3a35-487f-902e-18f2f33c6b34",
+  "versionId": "38c3833d-2d27-4c69-b971-581f2dcb7bb2",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "f2fbd20fef49902a1e4ccac6d94de73e04784642201a97e3dd11e84b739a5106"
