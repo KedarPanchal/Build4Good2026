@@ -1,0 +1,216 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "findlawyer",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "31740033-e58c-47e9-b050-52c59694a9ad",
+      "name": "Webhook",
+      "webhookId": "ab61c7ee-4a6e-4a24-bd6f-0b96ea83f072"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Constants used throughout validation\nlet valid = true; \nconst REQUIRED_KEYS = new Set([\"priceLow\", \"priceHigh\", \"city\", \"caseType\", \"languages\", \"disabilityFocused\", \"description\"]);\nconst invalidString = s => typeof s !== \"string\" || s.trim().length === 0;\n\n// Get JSON to validate\nconst body = $input.first().json.body;\n\n// Check if all fields are present\nif ([...REQUIRED_KEYS].some(k => body[k] == null)) valid = false;\nelse if (!Object.keys(body).every(k => REQUIRED_KEYS.has(k))) valid = false;\nelse {\n  // Extract all fields for individual validation checks\n  const {priceLow, priceHigh, city, caseType, languages, disabilityFocused, description} = body;\n  \n  // Check if fields are valid\n  if (\n    !Number.isFinite(priceLow) ||\n    !Number.isFinite(priceHigh) ||\n    priceLow < 0 || \n    priceHigh < 0 || \n    priceLow > priceHigh\n  ) valid = false;\n  else if (invalidString(city)) valid = false;\n  else if (invalidString(caseType)) valid = false;\n  else if (\n    !Array.isArray(languages) || \n    languages.some(lang => invalidString(lang))\n  ) valid = false;\n  else if (typeof disabilityFocused !== \"boolean\") valid = false;\n  else if (invalidString(description)) valid = false;\n}\n\n// Return the body and the valid flag \nreturn [{json: {...body, valid}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "3ef85916-47bb-4eae-90ab-9b84ff60e2ec",
+      "name": "Validate Structure"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        624,
+        176
+      ],
+      "id": "d693668d-2ab0-4e1c-86e7-91f7b942bf8d",
+      "name": "Error Code"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7649967e-f86e-44dc-80ac-ac20a7f24d65",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "a565e935-1187-42bd-a726-82035a777447",
+      "name": "Error Check"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a search agent whose purpose is to find lawyers only in Texas that match specific criteria and can help with a case that will be specified below. Attempt to find lawyers that only match the specified criteria and have expertise in the case description, and deviate slightly from the criteria only if few options for lawyers are available.\n\nThe case description is:\n{{ $json.description }}\n\nThe criteria are:\n\nMinimum Price (fees included): {{ $json.priceLow }}\nMaximum Price (fees included): {{ $json.priceHigh }}\nCity: {{ $json.city }}\nCase Type: {{ $json.caseType }}\nLanguages: {{ $json.languages.join(\", \") }}\nDisability Focused: {{ $json.disabilityFocused ? \"Yes\" : \"No\" }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        624,
+        -192
+      ],
+      "id": "2bc67b32-2b0e-4778-a605-e7827df0c78e",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "minimax/minimax-m2.5:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        624,
+        -336
+      ],
+      "id": "74cf73ad-0a4f-43d0-bbfb-fbe144ccd21e",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "yKmrPIyHxd0KO9S7",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -336
+      ],
+      "id": "2308b47e-dd5d-4806-b25c-5548351f8c88",
+      "name": "Search in Tavily",
+      "credentials": {
+        "tavilyApi": {
+          "id": "r2qhQ5v8Om9YvOxl",
+          "name": "Tavily account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate Structure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Structure": {
+      "main": [
+        [
+          {
+            "node": "Error Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Check": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search in Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "0ce4dc21-3a35-487f-902e-18f2f33c6b34",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f2fbd20fef49902a1e4ccac6d94de73e04784642201a97e3dd11e84b739a5106"
+  },
+  "id": "RcbS4gOWVJb1WHK8",
+  "tags": []
+}
