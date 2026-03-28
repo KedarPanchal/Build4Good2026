@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#767576",
+              "tertiary": "#9691ff",
+              "surface-container-low": "#0a192f",
+              "error": "#ff716c",
+              "on-secondary-fixed": "#453900",
+              "secondary-fixed": "#eab308",
+              "surface-variant": "#112240",
+              "on-secondary-fixed-variant": "#665500",
+              "surface-container-highest": "#1a1e2e",
+              "on-secondary-container": "#fff7e6",
+              "outline-variant": "#233554",
+              "on-error-container": "#ffa8a3",
+              "primary-fixed": "#eab308",
+              "on-tertiary-fixed": "#0e005e",
+              "surface": "#0a192f",
+              "primary-dim": "#ca8a04",
+              "surface-tint": "#eab308",
+              "on-tertiary-fixed-variant": "#2600be",
+              "on-primary-container": "#4a3c00",
+              "secondary-dim": "#eab308",
+              "inverse-surface": "#fcf8f9",
+              "secondary-container": "#5e4b00",
+              "on-background": "#ffffff",
+              "on-secondary": "#3d3200",
+              "on-surface": "#ccd6f6",
+              "primary-container": "#eab308",
+              "on-primary-fixed": "#2a2300",
+              "surface-container-high": "#112240",
+              "secondary": "#eab308",
+              "primary": "#eab308",
+              "tertiary-fixed": "#aba7ff",
+              "on-primary-fixed-variant": "#4a3c00",
+              "tertiary-container": "#6c63ff",
+              "on-error": "#490006",
+              "background": "#0a192f",
+              "on-surface-variant": "#8892b0",
+              "primary-fixed-dim": "#ca8a04",
+              "secondary-fixed-dim": "#eab308",
+              "error-dim": "#d7383b",
+              "surface-bright": "#112240",
+              "surface-container": "#0a192f",
+              "tertiary-fixed-dim": "#9c98ff",
+              "on-tertiary-container": "#000000",
+              "surface-dim": "#0a192f",
+              "inverse-primary": "#806d00",
+              "inverse-on-surface": "#565556",
+              "on-primary": "#3d3200",
+              "surface-container-lowest": "#020c1b",
+              "tertiary-dim": "#675df9",
+              "error-container": "#9f0519",
+              "on-tertiary": "#140076"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Manrope"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .liquid-glass {
+        background: rgba(17, 34, 64, 0.4);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(234, 179, 8, 0.1);
+      }
+      .nav-capsule {
+        background: rgba(10, 25, 47, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .liquid-input {
+        background: rgba(2, 12, 27, 0.6);
+        border: 1px solid rgba(234, 179, 8, 0.2);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      }
+      .liquid-input:focus {
+        border-color: rgba(234, 179, 8, 0.5);
+        box-shadow: 0 0 15px rgba(234, 179, 8, 0.1);
+        outline: none;
+      }
+      
+      .dual-range-slider {
+        position: relative;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+      }
+      .dual-range-slider .track-fill {
+        position: absolute;
+        height: 100%;
+        background: #eab308;
+        left: 20%;
+        right: 40%;
+      }
+      .dual-range-slider .thumb {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background: #eab308;
+        border-radius: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar -->
+<div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+<nav class="nav-capsule flex justify-between items-center px-8 py-2.5 w-full max-w-4xl rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
+<div class="text-lg font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#facc15] font-headline">Lex.AI</div>
+<div class="hidden md:flex items-center gap-8 font-label text-[10px] uppercase tracking-widest font-bold">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Research</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Cases</a>
+<a class="text-primary" href="#">Directory</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Insights</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors text-xl">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors text-xl">account_circle</button>
+</div>
+<button class="bg-gradient-to-r from-primary to-[#facc15] text-on-primary-fixed px-6 py-2 rounded-full font-label font-bold text-xs tracking-wider hover:scale-95 active:scale-90 transition-transform">
+                Try Now
+            </button>
+</div>
+</nav>
+</div>
+<!-- Main Content Area -->
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6 relative overflow-hidden aspect-[16/10]">
+<!-- Abstract Background Glows -->
+<div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+<!-- Central Search Card -->
+<div class="w-full max-w-3xl liquid-glass rounded-[2rem] p-8 md:p-10 relative z-10 shadow-2xl">
+<button class="absolute top-6 left-6 material-symbols-outlined text-on-surface-variant hover:text-white transition-colors cursor-pointer">close</button>
+<form class="space-y-8 mt-4">
+<!-- Row 1: City and Case Type -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block font-headline font-bold text-sm text-white flex items-center gap-2">City:</label>
+<input class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block font-headline font-bold text-sm text-white flex items-center gap-2">Case Type:</label>
+<div class="relative">
+<select class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body appearance-none cursor-pointer">
+<option>Intellectual Property</option>
+<option>Corporate Litigation</option>
+<option>Digital Privacy</option>
+<option>AI Governance</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Price (Dual-node slider) -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-headline font-bold text-sm text-white">Price:</label>
+<span class="text-primary font-label text-[10px] tracking-widest uppercase">$250 — $850+ / hr</span>
+</div>
+<div class="px-2 py-4">
+<div class="dual-range-slider">
+<div class="track-fill"></div>
+<div class="thumb" style="left: 20%;"></div>
+<div class="thumb" style="left: 60%;"></div>
+</div>
+</div>
+</div>
+<!-- Row 3: Languages (Multi-select) -->
+<div class="space-y-2">
+<label class="block font-headline font-bold text-sm text-white">Languages:</label>
+<div class="w-full liquid-input rounded-xl p-2 flex flex-wrap gap-2 items-center min-h-[50px]">
+<div class="bg-primary/20 border border-primary/30 text-primary px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">close</span>
+                        Español
+                    </div>
+<input class="bg-transparent border-none focus:ring-0 text-white font-body text-sm flex-grow placeholder:text-outline/30" placeholder="Add language..." type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant ml-auto mr-2">expand_more</span>
+</div>
+</div>
+<!-- Row 4: Case Description -->
+<div class="space-y-2">
+<label class="block font-headline font-bold text-sm text-white">Case Description:</label>
+<textarea class="w-full h-32 liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..."></textarea>
+</div>
+<!-- Row 5: ADA Compliant -->
+<div class="flex items-center gap-3">
+<label class="font-headline font-bold text-sm text-white">ADA Compliant:</label>
+<input class="w-5 h-5 rounded border-primary/30 bg-surface-container-lowest text-primary focus:ring-primary focus:ring-offset-background transition-all" id="ada" type="checkbox"/>
+</div>
+<!-- Footer of the card -->
+<div class="flex justify-end items-center gap-4 pt-4 border-t border-outline-variant/10">
+<button class="w-44 h-12 rounded-xl border border-outline-variant text-white font-headline font-bold hover:bg-white/5 transition-all text-xs uppercase tracking-widest" type="button">
+                    Cancel
+                </button>
+<button class="bg-primary w-44 h-12 rounded-xl text-on-primary-fixed font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-lg">search</span>
+                    Search
+                </button>
+</div>
+</form>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-6 bg-surface border-t border-outline-variant/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 gap-6 max-w-7xl mx-auto">
+<div class="text-lg font-bold text-white font-headline tracking-tight">Lex.AI</div>
+<div class="flex flex-wrap justify-center gap-8 font-label text-[10px] tracking-widest uppercase text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">AI Ethics</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="text-slate-500 font-label text-[10px] tracking-widest uppercase opacity-80">
+            © 2024 Lex.AI. Legal Access for Everyone.
+        </div>
+</div>
+</footer>
+</body></html>
