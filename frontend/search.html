@@ -74,6 +74,8 @@
         },
       }
     </script>
+    <script src = "components/header.js" type= "text/javascript" defer></script>
+    <script src = "components/footer.js" type= "text/javascript" defer></script>
 <style>
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -170,26 +172,7 @@
 </head>
 <body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col">
 <!-- TopNavBar -->
-<div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
-<nav class="nav-capsule flex justify-between items-center px-8 py-2.5 w-full max-w-4xl rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
-<div class="text-lg font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#facc15] font-headline">Lex.AI</div>
-<div class="hidden md:flex items-center gap-8 font-label text-[10px] uppercase tracking-widest font-bold">
-<a class="text-slate-400 hover:text-white transition-colors" href="#">Research</a>
-<a class="text-slate-400 hover:text-white transition-colors" href="#">Cases</a>
-<a class="text-primary" href="#">Directory</a>
-<a class="text-slate-400 hover:text-white transition-colors" href="#">Insights</a>
-</div>
-<div class="flex items-center gap-6">
-<div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors text-xl">notifications</button>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors text-xl">account_circle</button>
-</div>
-<button class="bg-gradient-to-r from-primary to-[#facc15] text-on-primary-fixed px-6 py-2 rounded-full font-label font-bold text-xs tracking-wider hover:scale-95 active:scale-90 transition-transform">
-                Try Now
-            </button>
-</div>
-</nav>
-</div>
+<app-header></app-header>
 <!-- Main Content Area -->
 <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6 relative overflow-visible">
 <!-- Abstract Background Glows -->
@@ -278,20 +261,7 @@
 </div>
 </main>
 <!-- Footer -->
-<footer class="w-full py-6 bg-surface border-t border-outline-variant/5">
-<div class="flex flex-col md:flex-row justify-between items-center px-8 gap-6 max-w-7xl mx-auto">
-<div class="text-lg font-bold text-white font-headline tracking-tight">Lex.AI</div>
-<div class="flex flex-wrap justify-center gap-8 font-label text-[10px] tracking-widest uppercase text-slate-500">
-<a class="hover:text-primary transition-colors" href="#">Privacy</a>
-<a class="hover:text-primary transition-colors" href="#">Terms</a>
-<a class="hover:text-primary transition-colors" href="#">AI Ethics</a>
-<a class="hover:text-primary transition-colors" href="#">Contact</a>
-</div>
-<div class="text-slate-500 font-label text-[10px] tracking-widest uppercase opacity-80">
-            © 2024 Lex.AI. Legal Access for Everyone.
-        </div>
-</div>
-</footer>
+<app-footer></app-footer>
 <script>
 // Prevent form submission on Enter key (except when clicking Search button)
 document.addEventListener('DOMContentLoaded', () => {
