@@ -1,4 +1,4 @@
-.PHONY: all run build open down clean
+.PHONY: all run build open down clean barsearch
 
 all: build run open
 
@@ -16,4 +16,7 @@ down:
 
 clean:
 	yes | docker system prune
+
+barsearch:
+	docker compose up -d barsearch
 

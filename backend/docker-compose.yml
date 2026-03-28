@@ -15,6 +15,15 @@ services:
       # Email: hackathon@build4good.com
       # Password: Building4Good
 
+  barsearch:    
+    build:
+      context: ./barsearch
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"
+    networks:
+      - n8n-network
+
   browserless:
     image: browserless/chrome:latest
     ports:
