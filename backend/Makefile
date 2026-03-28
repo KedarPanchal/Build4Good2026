@@ -1,4 +1,4 @@
-.PHONY all run build open down clean
+.PHONY: all run build open down clean
 
 all: build run open
 
