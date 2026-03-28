@@ -23,19 +23,7 @@ services:
       - "6000:6000"
     networks:
       - n8n-network
-
-  browserless:
-    image: browserless/chrome:latest
-    ports:
-      - "3000:3000"
-    networks:
-      - n8n-network
-    environment:
-      - "PREBOOT_CHROME=true"
-      - "MAX_CONCURRENT_SESSIONS=5"
-      - "DEFAULT_BLOCK_ADS=true"
-      - "DEFAULT_BLOCK_TRACKERS=true"
-
+  
 networks:
   n8n-network:
     driver: bridge
