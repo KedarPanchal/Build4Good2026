@@ -80,9 +80,9 @@ const renderLawyer = () => {
     document.getElementById("profile-website").textContent = currentLawyer.website;
     document.getElementById("profile-website").href = currentLawyer.website;
     document.getElementById("profile-rate").textContent = `$${currentLawyer.cost}`;
-    document.getElementById("profile-total-cost").textContent = currentLawyer.cost * rand(10, 30);
+    document.getElementById("profile-total-cost").textContent = `$${currentLawyer.cost * rand(10, 30)}`;
     document.getElementById("profile-location").textContent = currentLawyer.location;
-    document.getElementById("profile-win-rate").textContent = rand(60, 99);
+    document.getElementById("profile-win-rate").textContent = `${rand(60, 99)}%`
     document.getElementById("profile-experience").textContent = `${currentLawyer.years_of_experience}`;
 }
 
