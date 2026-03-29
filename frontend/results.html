@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#ccd6f6",
+              "surface-container": "#0a192f",
+              "background": "#0a192f",
+              "primary-fixed": "#D4AF37",
+              "primary-container": "#D4AF37",
+              "secondary-dim": "#D4AF37",
+              "surface-container-low": "#0a192f",
+              "surface-container-lowest": "#020c1b",
+              "surface-dim": "#0a192f",
+              "on-background": "#ffffff",
+              "error": "#ff716c",
+              "surface-bright": "#112240",
+              "on-primary": "#3d3200",
+              "outline": "#767576",
+              "primary-dim": "#c09a2b",
+              "surface": "#0a192f",
+              "tertiary": "#9691ff",
+              "outline-variant": "#233554",
+              "surface-container-highest": "#1a1e2e",
+              "on-surface-variant": "#8892b0",
+              "secondary": "#D4AF37",
+              "on-secondary": "#3d3200",
+              "surface-tint": "#D4AF37",
+              "secondary-container": "#5e4b00",
+              "surface-container-high": "#112240",
+              "primary": "#D4AF37"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Manrope"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem", "3xl": "1.5rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0a192f;
+            color: #ccd6f6;
+            font-family: 'Manrope', sans-serif;
+            overflow: hidden;
+        }
+        .glass-card {
+            background: rgba(17, 34, 64, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.05);
+        }
+        .brass-glow {
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background selection:bg-primary/30 h-screen overflow-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a192f]/60 backdrop-blur-xl border-b border-white/5">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#f2cf66] font-headline">
+                Lex.AI
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-slate-400 hover:text-white transition-colors font-label text-[11px] uppercase tracking-widest" href="#">Profile</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-label text-[11px] uppercase tracking-widest" href="#">Find Lawyers</a>
+<a class="text-slate-400 hover:text-white transition-colors font-label text-[11px] uppercase tracking-widest" href="#">Contact Us</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-white/5 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-white/5 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/20 bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="h-screen pt-20 pb-20 flex items-center justify-center px-8 overflow-hidden">
+<div class="w-full max-w-[1440px] h-full max-h-[800px] aspect-[16/10] flex items-center justify-between relative gap-8">
+<!-- Previous Button -->
+<button class="z-10 group p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-500 hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-white text-2xl transition-colors">arrow_back_ios_new</span>
+</button>
+<!-- Central Profile Card -->
+<div class="glass-card flex-grow h-full rounded-[2rem] flex flex-col overflow-hidden relative border border-white/5 shadow-2xl">
+<div class="flex-grow flex p-16 gap-12 overflow-hidden items-start">
+<!-- Left Column: AI Bio + Contact Info -->
+<div class="flex-[1.2] flex flex-col gap-10 overflow-y-auto pr-6 scrollbar-hide">
+<div class="space-y-6">
+<span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[10px] font-label font-bold uppercase tracking-[0.2em]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                AI-Generated Insight
+                            </span>
+<h1 class="text-7xl font-headline font-bold tracking-tight text-white">John Doe</h1>
+<p class="text-on-surface font-body text-xl leading-relaxed">
+                                John Doe is a distinguished legal professional with a reputation for precision and architectural strategy in the courtroom. With over 15 years of experience navigating the complexities of New York's legal landscape.
+                            </p>
+</div>
+<!-- Moved Contact Quick Actions -->
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">mail</span>
+<div class="flex flex-col">
+<span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Email Address</span>
+<span class="text-sm font-label text-slate-200">j.doe@lex.ai</span>
+</div>
+</div>
+<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">call</span>
+<div class="flex flex-col">
+<span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Phone Line</span>
+<span class="text-sm font-label text-slate-200">+1 212 555 0198</span>
+</div>
+</div>
+<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">public</span>
+<div class="flex flex-col">
+<span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Website</span>
+<span class="text-sm font-label text-slate-200">www.johndoe.com</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Reformatted Metrics -->
+<div class="flex-[0.8] flex flex-col gap-4 mt-6">
+<!-- Hourly Rate Block -->
+<div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
+<span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Hourly Rate</span>
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-headline font-bold text-5xl">$450</span>
+<span class="text-primary/50 font-label text-xs uppercase tracking-tighter">/ hr</span>
+</div>
+</div>
+<!-- Based In Block (Formatted like Hourly Rate) -->
+<div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
+<span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Based In</span>
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-headline font-bold text-4xl">New York, NY</span>
+</div>
+</div>
+<!-- Experience Block (Formatted like Hourly Rate) -->
+<div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
+<span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Experience</span>
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-headline font-bold text-5xl">15+</span>
+<span class="text-primary/50 font-label text-xs uppercase tracking-tighter">Years</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Contact Button -->
+<div class="flex justify-center pb-12">
+<button class="bg-gradient-to-r from-[#D4AF37] to-[#f2cf66] text-on-primary font-headline font-bold text-lg tracking-[0.4em] uppercase transition-all duration-500 hover:opacity-90 active:scale-[0.99] brass-glow border-white/10 px-32 py-3 rounded-lg w-fit" style="letter-spacing: 0.4em;">
+                        CONTACT
+                    </button>
+</div>
+</div>
+<!-- Next Button -->
+<button class="z-10 group p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-500 hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-white text-2xl transition-colors">arrow_forward_ios</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full bg-background/80 backdrop-blur-md">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-6 w-full border-t border-white/5">
+<div class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#f2cf66] font-headline mb-4 md:mb-0">
+                Lex.AI
+            </div>
+<p class="text-slate-500 font-label text-[10px] tracking-widest uppercase text-center md:text-left">
+                © 2024 Lex.AI. Legal Access for Everyone.
+            </p>
+<div class="flex gap-8 mt-4 md:mt-0">
+<a class="text-slate-500 hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase" href="#">Privacy</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase" href="#">Terms</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase" href="#">AI Ethics</a>
+</div>
+</div>
+</footer>
+<!-- Geometric Accents -->
+<div class="fixed top-0 right-0 -z-10 w-1/2 h-1/2 bg-primary/5 blur-[150px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+</body></html>
