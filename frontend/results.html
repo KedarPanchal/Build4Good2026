@@ -87,97 +87,99 @@
 <body class="bg-background selection:bg-primary/30 min-h-screen flex flex-col">
 <!-- Top Navigation Bar -->
 <app-header></app-header>
+
 <!-- Main Content Area -->
 <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-8">
-<div class="w-full max-w-[1440px] flex items-center justify-between relative gap-8">
-<!-- Previous Button -->
-<button class="z-10 group p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-500 hover:scale-105 active:scale-95">
-<span class="material-symbols-outlined text-slate-500 group-hover:text-white text-2xl transition-colors">arrow_back_ios_new</span>
-</button>
-<!-- Central Profile Card -->
-<div class="glass-card flex-grow h-full rounded-[2rem] flex flex-col overflow-hidden relative border border-white/5 shadow-2xl">
-<div class="flex-grow flex p-16 gap-12 overflow-hidden items-start">
-<!-- Left Column: AI Bio + Contact Info -->
-<div class="flex-[1.2] flex flex-col gap-10 overflow-y-auto pr-6 scrollbar-hide">
-<div class="space-y-6">
-<span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[10px] font-label font-bold uppercase tracking-[0.2em]">
-<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-                                AI-Generated Insight
-                            </span>
-<h1 class="text-7xl font-headline font-bold tracking-tight text-white">John Doe</h1>
-<p class="text-on-surface font-body text-xl leading-relaxed">
-                                John Doe is a distinguished legal professional with a reputation for precision and architectural strategy in the courtroom. With over 15 years of experience navigating the complexities of New York's legal landscape.
-                            </p>
-</div>
-<!-- Moved Contact Quick Actions -->
-<div class="grid grid-cols-1 gap-4">
-<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-<span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">mail</span>
-<div class="flex flex-col">
-<span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Email Address</span>
-<a href="mailto:j.doe@lex.ai" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">j.doe@lex.ai</a>
-</div>
-</div>
-<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-<span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">call</span>
-<div class="flex flex-col">
-<span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Phone Line</span>
-<a href="tel:+12125550198" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">+1 (212)-555-0198</a>
-</div>
-</div>
-<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-<span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">public</span>
-<div class="flex flex-col">
-<span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Website</span>
-<a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">www.johndoe.com</a>
-</div>
-</div>
-</div>
-</div>
-<!-- Right Column: Reformatted Metrics -->
-<div class="flex-[0.8] flex flex-col gap-4 mt-6">
-<!-- Hourly Rate Block -->
-<div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
-<span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Hourly Rate</span>
-<div class="flex items-baseline gap-2">
-<span class="text-primary font-headline font-bold text-5xl">$450</span>
-<span class="text-primary/50 font-label text-xs uppercase tracking-tighter">/ hr</span>
-</div>
-</div>
-<!-- Based In Block (Formatted like Hourly Rate) -->
-<div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
-<span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Based In</span>
-<div class="flex items-baseline gap-2">
-<span class="text-primary font-headline font-bold text-4xl">New York, NY</span>
-</div>
-</div>
-<!-- Experience Block (Formatted like Hourly Rate) -->
-<div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
-<span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Experience</span>
-<div class="flex items-baseline gap-2">
-<span class="text-primary font-headline font-bold text-5xl">15+</span>
-<span class="text-primary/50 font-label text-xs uppercase tracking-tighter">Years</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer Contact Button -->
-<div class="flex justify-center pb-12">
-<button class="bg-primary w-64 h-14 rounded-xl text-black font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-sm uppercase tracking-widest flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-xl">mail</span>
-                        Contact
-                    </button>
-</div>
-</div>
-<!-- Next Button -->
-<button class="z-10 group p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-500 hover:scale-105 active:scale-95">
-<span class="material-symbols-outlined text-slate-500 group-hover:text-white text-2xl transition-colors">arrow_forward_ios</span>
-</button>
-</div>
+    <div class="w-full max-w-[1440px] flex items-center justify-between relative gap-8">
+        <!-- Previous Button -->
+        <button class="z-10 group p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-500 hover:scale-105 active:scale-95">
+            <span class="material-symbols-outlined text-slate-500 group-hover:text-white text-2xl transition-colors">arrow_back_ios_new</span>
+        </button>
+        <!-- Central Profile Card -->
+        <div class="glass-card flex-grow h-full rounded-[2rem] flex flex-col overflow-hidden relative border border-white/5 shadow-2xl">
+            <div class="flex-grow flex p-16 gap-12 overflow-hidden items-start">
+                <!-- Left Column: AI Bio + Contact Info -->
+                <div class="flex-[1.2] flex flex-col gap-10 overflow-y-auto pr-6 scrollbar-hide">
+                    <div class="space-y-6">
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[10px] font-label font-bold uppercase tracking-[0.2em]">
+                            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            AI-Generated Insight
+                        </span>
+                        <h1 class="text-7xl font-headline font-bold tracking-tight text-white">John Doe</h1>
+                        <p class="text-on-surface font-body text-xl leading-relaxed">
+                            John Doe is a distinguished legal professional with a reputation for precision and architectural strategy in the courtroom. With over 15 years of experience navigating the complexities of New York's legal landscape.
+                        </p>
+                    </div>
+                    <!-- Moved Contact Quick Actions -->
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">mail</span>
+                            <div class="flex flex-col">
+                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Email Address</span>
+                                <a href="mailto:j.doe@lex.ai" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">j.doe@lex.ai</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">call</span>
+                            <div class="flex flex-col">
+                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Phone Line</span>
+                                <a href="tel:+12125550198" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">+1 (212)-555-0198</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">public</span>
+                            <div class="flex flex-col">
+                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Website</span>
+                                <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">www.johndoe.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: Reformatted Metrics -->
+                <div class="flex-[0.8] flex flex-col gap-4 mt-6">
+                    <!-- Hourly Rate Block -->
+                    <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
+                        <span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Hourly Rate</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-primary font-headline font-bold text-5xl">$450</span>
+                            <span class="text-primary/50 font-label text-xs uppercase tracking-tighter">/ hr</span>
+                        </div>
+                    </div>
+                    <!-- Based In Block (Formatted like Hourly Rate) -->
+                    <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
+                        <span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Based In</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-primary font-headline font-bold text-4xl">New York, NY</span>
+                        </div>
+                    </div>
+                    <!-- Experience Block (Formatted like Hourly Rate) -->
+                    <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
+                        <span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Experience</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-primary font-headline font-bold text-5xl">15+</span>
+                            <span class="text-primary/50 font-label text-xs uppercase tracking-tighter">Years</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Contact Button -->
+            <div class="flex justify-center pb-12">
+            <button class="bg-primary w-64 h-14 rounded-xl text-black font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-xl">mail</span>
+                Contact
+                </button>
+            </div>
+        </div>
+        <!-- Next Button -->
+        <button class="z-10 group p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-500 hover:scale-105 active:scale-95">
+            <span class="material-symbols-outlined text-slate-500 group-hover:text-white text-2xl transition-colors">arrow_forward_ios</span>
+        </button>
+    </div>
 </main>
 <!-- Footer -->
 <app-footer></app-footer>
 <!-- Geometric Accents -->
 <div class="fixed top-0 right-0 -z-10 w-1/2 h-1/2 bg-primary/5 blur-[150px] rounded-full pointer-events-none"></div>
 <div class="fixed bottom-0 left-0 -z-10 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
-</body></html>
+</body>
+</html>
