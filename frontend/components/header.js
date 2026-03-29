@@ -19,7 +19,7 @@ class Header extends HTMLElement {
                             <span class="material-symbols-outlined text-sm">person</span>
                             Profile
                         </button>
-                        <button class="bg-gradient-to-r from-primary to-[#f2cf66] text-on-primary-fixed font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider transition-all duration-400 active:scale-95 shadow-lg shadow-primary/10">
+                        <button onclick="window.location.href='search.html'" class="bg-gradient-to-r from-primary to-[#f2cf66] text-on-primary-fixed font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider transition-all duration-400 active:scale-95 shadow-lg shadow-primary/10">
                             Try Now
                         </button>
                     </div>
