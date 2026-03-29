@@ -184,75 +184,75 @@
         </button>
         <!-- Central Profile Card -->
         <div class="glass-card flex-grow h-full rounded-[2rem] flex flex-col overflow-hidden relative border border-white/5 shadow-2xl" id="profile-card">
-            <div class="flex-grow flex p-16 gap-12 overflow-hidden items-start">
+            <div class="flex-grow flex p-10 gap-10 overflow-hidden items-start">
                 <!-- Left Column: AI Bio + Contact Info -->
-                <div class="flex-[1.2] flex flex-col gap-10 overflow-y-auto pr-6 scrollbar-hide">
-                    <div class="space-y-6">
-                        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[10px] font-label font-bold uppercase tracking-[0.2em]">
-                            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                <div class="flex-[1.2] flex flex-col gap-6 overflow-y-auto pr-4 scrollbar-hide">
+                    <div class="space-y-4">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[9px] font-label font-bold uppercase tracking-[0.2em]">
+                            <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
                             AI-Generated Insight
                         </span>
-                        <h1 class="text-7xl font-headline font-bold tracking-tight text-white" id="profile-name">John Doe</h1>
-                        <p class="text-on-surface font-body text-xl leading-relaxed" id="profile-bio">
+                        <h1 class="text-5xl font-headline font-bold tracking-tight text-white" id="profile-name">John Doe</h1>
+                        <p class="text-on-surface font-body text-sm leading-relaxed" id="profile-bio">
                             John Doe is a distinguished legal professional with a reputation for precision and architectural strategy in the courtroom. With over 15 years of experience navigating the complexities of New York's legal landscape.
                         </p>
                     </div>
-                    <!-- Moved Contact Quick Actions -->
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-                            <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">mail</span>
+                    <!-- Contact Quick Actions -->
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="flex items-center gap-3 group p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined p-1.5 rounded-lg bg-primary/10 text-primary text-base">mail</span>
                             <div class="flex flex-col">
-                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Email Address</span>
-                                <a href="mailto:j.doe@lex.ai" class="text-sm font-label text-slate-200 hover:text-primary transition-colors" id="profile-mail">j.doe@lex.ai</a>
+                                <span class="text-[8px] text-slate-500 font-label uppercase tracking-widest">Email Address</span>
+                                <a href="mailto:j.doe@lex.ai" class="text-xs font-label text-slate-200 hover:text-primary transition-colors" id="profile-mail">j.doe@lex.ai</a>
                             </div>
                         </div>
-                        <div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-                            <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">call</span>
+                        <div class="flex items-center gap-3 group p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined p-1.5 rounded-lg bg-primary/10 text-primary text-base">call</span>
                             <div class="flex flex-col">
-                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Phone Line</span>
-                                <a href="tel:+12125550198" class="text-sm font-label text-slate-200 hover:text-primary transition-colors" id="profile-phone">+1 (212)-555-0198</a>
+                                <span class="text-[8px] text-slate-500 font-label uppercase tracking-widest">Phone Line</span>
+                                <a href="tel:+12125550198" class="text-xs font-label text-slate-200 hover:text-primary transition-colors" id="profile-phone">+1 (212)-555-0198</a>
                             </div>
                         </div>
-                        <div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-                            <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">public</span>
+                        <div class="flex items-center gap-3 group p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined p-1.5 rounded-lg bg-primary/10 text-primary text-base">public</span>
                             <div class="flex flex-col">
-                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Website</span>
-                                <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="text-sm font-label text-slate-200 hover:text-primary transition-colors" id="profile-website">www.johndoe.com</a>
+                                <span class="text-[8px] text-slate-500 font-label uppercase tracking-widest">Website</span>
+                                <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="text-xs font-label text-slate-200 hover:text-primary transition-colors" id="profile-website">www.johndoe.com</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Right Column: Reformatted Metrics -->
-                <div class="flex-[0.8] flex flex-col gap-4 mt-6">
+                <div class="flex-[0.8] flex flex-col gap-3">
                     <!-- Hourly Rate Block -->
-                    <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
-                        <span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Hourly Rate</span>
+                    <div class="pt-4 pb-5 px-6 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                        <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Hourly Rate</span>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-primary font-headline font-bold text-5xl" id="profile-rate">$450</span>
-                            <span class="text-primary/50 font-label text-xs uppercase tracking-tighter">/ hr</span>
+                            <span class="text-primary font-headline font-bold text-3xl" id="profile-rate">$450</span>
+                            <span class="text-primary/50 font-label text-[10px] uppercase tracking-tighter">/ hr</span>
                         </div>
                     </div>
-                    <!-- Based In Block (Formatted like Hourly Rate) -->
-                    <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
-                        <span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Based In</span>
+                    <!-- Based In Block -->
+                    <div class="pt-4 pb-5 px-6 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                        <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Based In</span>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-primary font-headline font-bold text-4xl" id="profile-location">New York, NY</span>
+                            <span class="text-primary font-headline font-bold text-2xl" id="profile-location">New York, NY</span>
                         </div>
                     </div>
-                    <!-- Experience Block (Formatted like Hourly Rate) -->
-                    <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
-                        <span class="text-[10px] text-slate-500 font-label uppercase tracking-widest">Experience</span>
+                    <!-- Experience Block -->
+                    <div class="pt-4 pb-5 px-6 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                        <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Experience</span>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-primary font-headline font-bold text-5xl" id="profile-experience">15+</span>
-                            <span class="text-primary/50 font-label text-xs uppercase tracking-tighter">Years</span>
+                            <span class="text-primary font-headline font-bold text-3xl" id="profile-experience">15+</span>
+                            <span class="text-primary/50 font-label text-[10px] uppercase tracking-tighter">Years</span>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Footer Contact Button -->
-            <div class="flex justify-center pb-12">
-            <button onclick="document.getElementById('contact-modal').classList.add('show')" class="bg-primary w-64 h-14 rounded-xl text-black font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest flex items-center justify-center gap-2">
-                <span class="material-symbols-outlined text-xl">mail</span>
+            <div class="flex justify-center pb-8">
+            <button onclick="document.getElementById('contact-modal').classList.add('show')" class="bg-primary w-56 h-12 rounded-xl text-black font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-lg">mail</span>
                 Contact
                 </button>
             </div>
