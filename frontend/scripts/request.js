@@ -28,7 +28,7 @@ const submitForm = async (event) => {
     const caseType = document.getElementById("form-case-type").value;
     const minPrice = Number(document.getElementById("price-min-input").value);
     const maxPrice = Number(document.getElementById("price-max-input").value);
-    const languages = Array.from(selectedLanguages);
+    const languages = ["English", ...Array.from(selectedLanguages)];
     const description = document.getElementById("form-description").value;
     const ada = document.getElementById("ada").checked;  
 
@@ -36,6 +36,7 @@ const submitForm = async (event) => {
     await findLawyer(city, caseType, minPrice, maxPrice, languages, description, ada);
     document.getElementById("loading-overlay").classList.remove("show");
     window.location.href = "results.html";
+    renderLawyer();
 }
 
 const form = document.getElementById("search-form");
@@ -45,18 +46,17 @@ if (form) {
 
 const renderLawyer = () => {
     const currentLawyer = lawyerList[lawyerListIndex];
-    const profile = document.getElementById("profile-card");
-    profile.getElementById("profile-name").textContent = currentLawyer.name;
-    profile.getElementById("profile-bio").textContent = currentLawyer.description;
-    profile.getElementById("profile-mail").textContent = currentLawyer.email;
-    profile.getElementById("profile-mail").href = `mailto:${currentLawyer.email}`;
-    profile.getElementById("profile-phone").textContent = currentLawyer.phone;
-    profile.getElementById("profile-phone").href = `tel:${currentLawyer.phone}`;
-    profile.getElementById("profile-website").textContent = currentLawyer.website;
-    profile.getElementById("profile-website").href = currentLawyer.website;
-    profile.getElementById("profile-rate").textContent = `$${currentLawyer.cost}`;
-    profile.getElementById("profile-location").textContent = `${currentLawyer.location}, TX`;
-    profile.getElementById("profile-experience").textContent = `${currentLawyer.experience}`;
+    document.getElementById("profile-name").textContent = currentLawyer.name;
+    document.getElementById("profile-bio").textContent = currentLawyer.description;
+    document.getElementById("profile-mail").textContent = currentLawyer.email;
+    document.getElementById("profile-mail").href = `mailto:${currentLawyer.email}`;
+    document.getElementById("profile-phone").textContent = currentLawyer.phone;
+    document.getElementById("profile-phone").href = `tel:${currentLawyer.phone}`;
+    document.getElementById("profile-website").textContent = currentLawyer.website;
+    document.getElementById("profile-website").href = currentLawyer.website;
+    document.getElementById("profile-rate").textContent = `$${currentLawyer.cost}`;
+    document.getElementById("profile-location").textContent = `${currentLawyer.location}, TX`;
+    document.getElementById("profile-experience").textContent = `${currentLawyer.experience}`;
 }
 
 const nextLawyer = () => {
@@ -69,5 +69,9 @@ const previousLawyer = () => {
     renderLawyer();
 }
 
-document.getElementById("next-button").addEventListener("click", nextLawyer);
-document.getElementById("previous-button").addEventListener("click", previousLawyer);
+const nextButton = document.getElementById("next-button");
+const previousButton = document.getElementById("previous-button");
+if (nextButton && previousButton) {
+    document.getElementById("next-button").addEventListener("click", nextLawyer);
+    document.getElementById("previous-button").addEventListener("click", previousLawyer);
+}
