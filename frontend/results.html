@@ -49,12 +49,22 @@
         },
       }
     </script>
+    <script src="components/header.js" type="text/javascript" defer></script>
+    <script src="components/footer.js" type="text/javascript" defer></script>
 <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
         body {
             background-color: #0a192f;
             color: #ccd6f6;
             font-family: 'Manrope', sans-serif;
-            overflow: hidden;
+        }
+        .nav-capsule {
+            background: rgba(10, 25, 47, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .glass-card {
             background: rgba(17, 34, 64, 0.25);
@@ -74,34 +84,12 @@
         }
     </style>
 </head>
-<body class="bg-background selection:bg-primary/30 h-screen overflow-hidden">
+<body class="bg-background selection:bg-primary/30 min-h-screen flex flex-col">
 <!-- Top Navigation Bar -->
-<nav class="fixed top-0 w-full z-50 bg-[#0a192f]/60 backdrop-blur-xl border-b border-white/5">
-<div class="flex justify-between items-center px-8 py-4 w-full max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#f2cf66] font-headline">
-                Lex.AI
-            </div>
-<div class="hidden md:flex items-center space-x-8">
-<a class="text-slate-400 hover:text-white transition-colors font-label text-[11px] uppercase tracking-widest" href="#">Profile</a>
-<a class="text-primary border-b-2 border-primary pb-1 font-label text-[11px] uppercase tracking-widest" href="#">Find Lawyers</a>
-<a class="text-slate-400 hover:text-white transition-colors font-label text-[11px] uppercase tracking-widest" href="#">Contact Us</a>
-</div>
-<div class="flex items-center gap-4">
-<button class="p-2 text-slate-400 hover:bg-white/5 transition-all duration-300 rounded-full">
-<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
-</button>
-<button class="p-2 text-slate-400 hover:bg-white/5 transition-all duration-300 rounded-full">
-<span class="material-symbols-outlined text-xl">notifications</span>
-</button>
-<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/20 bg-surface-container-high flex items-center justify-center">
-<span class="material-symbols-outlined text-primary">person</span>
-</div>
-</div>
-</div>
-</nav>
+<app-header></app-header>
 <!-- Main Content Area -->
-<main class="h-screen pt-20 pb-20 flex items-center justify-center px-8 overflow-hidden">
-<div class="w-full max-w-[1440px] h-full max-h-[800px] aspect-[16/10] flex items-center justify-between relative gap-8">
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-8">
+<div class="w-full max-w-[1440px] flex items-center justify-between relative gap-8">
 <!-- Previous Button -->
 <button class="z-10 group p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-500 hover:scale-105 active:scale-95">
 <span class="material-symbols-outlined text-slate-500 group-hover:text-white text-2xl transition-colors">arrow_back_ios_new</span>
@@ -123,25 +111,25 @@
 </div>
 <!-- Moved Contact Quick Actions -->
 <div class="grid grid-cols-1 gap-4">
-<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
 <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">mail</span>
 <div class="flex flex-col">
 <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Email Address</span>
-<span class="text-sm font-label text-slate-200">j.doe@lex.ai</span>
+<a href="mailto:j.doe@lex.ai" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">j.doe@lex.ai</a>
 </div>
 </div>
-<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
 <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">call</span>
 <div class="flex flex-col">
 <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Phone Line</span>
-<span class="text-sm font-label text-slate-200">+1 212 555 0198</span>
+<a href="tel:+12125550198" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">+1 (212)-555-0198</a>
 </div>
 </div>
-<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4 group p-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
 <span class="material-symbols-outlined p-2 rounded-lg bg-primary/10 text-primary text-lg">public</span>
 <div class="flex flex-col">
 <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Website</span>
-<span class="text-sm font-label text-slate-200">www.johndoe.com</span>
+<a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="text-sm font-label text-slate-200 hover:text-primary transition-colors">www.johndoe.com</a>
 </div>
 </div>
 </div>
@@ -175,8 +163,9 @@
 </div>
 <!-- Footer Contact Button -->
 <div class="flex justify-center pb-12">
-<button class="bg-gradient-to-r from-[#D4AF37] to-[#f2cf66] text-on-primary font-headline font-bold text-lg tracking-[0.4em] uppercase transition-all duration-500 hover:opacity-90 active:scale-[0.99] brass-glow border-white/10 px-32 py-3 rounded-lg w-fit" style="letter-spacing: 0.4em;">
-                        CONTACT
+<button class="bg-primary w-64 h-14 rounded-xl text-black font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl">mail</span>
+                        Contact
                     </button>
 </div>
 </div>
@@ -187,21 +176,7 @@
 </div>
 </main>
 <!-- Footer -->
-<footer class="fixed bottom-0 w-full bg-background/80 backdrop-blur-md">
-<div class="flex flex-col md:flex-row justify-between items-center px-12 py-6 w-full border-t border-white/5">
-<div class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#f2cf66] font-headline mb-4 md:mb-0">
-                Lex.AI
-            </div>
-<p class="text-slate-500 font-label text-[10px] tracking-widest uppercase text-center md:text-left">
-                © 2024 Lex.AI. Legal Access for Everyone.
-            </p>
-<div class="flex gap-8 mt-4 md:mt-0">
-<a class="text-slate-500 hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase" href="#">Privacy</a>
-<a class="text-slate-500 hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase" href="#">Terms</a>
-<a class="text-slate-500 hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase" href="#">AI Ethics</a>
-</div>
-</div>
-</footer>
+<app-footer></app-footer>
 <!-- Geometric Accents -->
 <div class="fixed top-0 right-0 -z-10 w-1/2 h-1/2 bg-primary/5 blur-[150px] rounded-full pointer-events-none"></div>
 <div class="fixed bottom-0 left-0 -z-10 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
