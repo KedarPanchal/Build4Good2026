@@ -195,13 +195,16 @@
 <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
 <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
 <!-- Central Search Card -->
-<div class="w-full max-w-3xl liquid-glass rounded-[2rem] p-8 md:p-10 relative z-10 shadow-2xl">
+<div class="w-full max-w-4xl liquid-glass rounded-[2rem] p-8 md:p-12 relative z-10 shadow-2xl">
 <button onclick="window.location.href='index.html'" class="absolute top-6 left-6 material-symbols-outlined text-on-surface-variant hover:text-white transition-colors cursor-pointer">close</button>
-<form class="space-y-8 mt-4" id="search-form">
+<form class="space-y-6 mt-4" id="search-form">
+<!-- Row 1: City + Case Type (left) | Case Description (right) -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Left column: City stacked above Case Type -->
+<div class="flex flex-col gap-4">
 <div class="space-y-2">
 <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">City:</label>
-<input class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
+<input class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body placeholder:text-outline/30" placeholder="e.g. Houston, TX" type="text"/>
 </div>
 <div class="space-y-2">
 <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">Case Type:</label>
@@ -262,6 +265,12 @@
 </div>
 </div>
 </div>
+<!-- Right column: Case Description (stretches to match left) -->
+<div class="flex flex-col space-y-2">
+<label class="block font-headline font-bold text-sm text-white">Case Description:</label>
+<textarea class="w-full flex-grow liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..."></textarea>
+</div>
+</div>
 <!-- Row 2: Price (Dual-node slider) -->
 <div class="space-y-4">
 <div class="flex justify-between items-center mb-4">
@@ -297,11 +306,6 @@
 <div class="language-dropdown" id="language-dropdown">
 <!-- Options will be populated by JavaScript -->
 </div>
-</div>
-<!-- Row 4: Case Description -->
-<div class="space-y-2">
-<label class="block font-headline font-bold text-sm text-white">Case Description:</label>
-<textarea class="w-full h-32 liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..."></textarea>
 </div>
 <!-- Row 5: ADA Compliant -->
 <div class="flex items-center gap-3">
