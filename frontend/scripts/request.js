@@ -1,5 +1,3 @@
-let lawyerList = [];
-let lawyerListIndex = 0;
 console.log("Request.js loaded");
 
 const findLawyer = async (city, caseType, minPrice, maxPrice, languages, description, ada) => {
@@ -19,7 +17,8 @@ const findLawyer = async (city, caseType, minPrice, maxPrice, languages, descrip
         }),
     });
     const json = await response.json();  
-    lawyerList = json.lawyers;
+    console.log(json);
+    sessionStorage.setItem("lawyerList", JSON.stringify(json.lawyers));
 };
 
 const submitForm = async (event) => {
@@ -36,13 +35,16 @@ const submitForm = async (event) => {
     await findLawyer(city, caseType, minPrice, maxPrice, languages, description, ada);
     document.getElementById("loading-overlay").classList.remove("show");
     window.location.href = "results.html";
-    renderLawyer();
 }
 
 const form = document.getElementById("search-form");
 if (form) {
     form.addEventListener("submit", submitForm);
 }
+
+const lawyerList = JSON.parse(sessionStorage.getItem("lawyerList")) || [];
+console.log(lawyerList);
+let lawyerListIndex = 0;
 
 const renderLawyer = () => {
     const currentLawyer = lawyerList[lawyerListIndex];
@@ -55,8 +57,12 @@ const renderLawyer = () => {
     document.getElementById("profile-website").textContent = currentLawyer.website;
     document.getElementById("profile-website").href = currentLawyer.website;
     document.getElementById("profile-rate").textContent = `$${currentLawyer.cost}`;
-    document.getElementById("profile-location").textContent = `${currentLawyer.location}, TX`;
-    document.getElementById("profile-experience").textContent = `${currentLawyer.experience}`;
+    document.getElementById("profile-location").textContent = currentLawyer.location;
+    document.getElementById("profile-experience").textContent = `${currentLawyer.years_of_experience}`;
+}
+
+if (document.getElementById("profile-name")) {
+    renderLawyer();
 }
 
 const nextLawyer = () => {
