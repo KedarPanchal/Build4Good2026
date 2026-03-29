@@ -8,9 +8,9 @@ class Header extends HTMLElement {
         <div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
             <nav class="nav-capsule flex justify-between items-center px-8 py-2.5 w-full max-w-4xl rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
                 <!-- Brand Logo -->
-                <div class="text-lg font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#f2cf66]">
+                <a class="text-lg font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#f2cf66]" href="index.html">
                     Lex.AI
-                </div>
+                </a>
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a class="text-slate-300 font-medium hover:text-[#D4AF37] transition-colors duration-300 text-xs uppercase tracking-wider" href="#">Contact</a>
