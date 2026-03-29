@@ -21,6 +21,21 @@ const findLawyer = async (city, caseType, minPrice, maxPrice, languages, descrip
         .then(json => lawyerList = json.lawyers);
 };
 
+const submitForm = async (event) => {
+    event.preventDefault();
+    const city = document.getElementById("form-city").value;
+    const caseType = document.getElementById("form-case-type").value;
+    const minPrice = document.getElementById("price-min-input").value;
+    const maxPrice = document.getElementById("price-max-input").value;
+    const languages = Array.from(selectedLanguages);
+    const description = document.getElementById("form-description").value;
+    const ada = document.getElementById("ada").checked;  
+    await findLawyer(city, caseType, minPrice, maxPrice, languages, description, ada);
+    window.location.href = "results.html";
+}
+
+document.getElementById("search-form").addEventListener("submit", submitForm);
+
 const renderLawyer = () => {
     const currentLawyer = lawyerList[lawyerListIndex];
     const profile = document.getElementById("profile-card");

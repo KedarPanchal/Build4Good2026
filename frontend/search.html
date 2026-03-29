@@ -187,12 +187,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-2">
                     <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">City:</label>
-                    <input class="w-full liquid-input rounded-xl py-3 px-4 text-black font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
+                    <input class="w-full liquid-input rounded-xl py-3 px-4 text-black font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text" id="form-city"/>
                 </div>
                 <div class="space-y-2">
                     <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">Case Type:</label>
                     <div class="relative">
-                        <select class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body appearance-none cursor-pointer">
+                        <select class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body appearance-none cursor-pointer" id="form-case-type">
                             <option>Intellectual Property</option>
                             <option>Corporate Litigation</option>
                             <option>Digital Privacy</option>
@@ -241,7 +241,7 @@
             <!-- Row 4: Case Description -->
             <div class="space-y-2">
                 <label class="block font-headline font-bold text-sm text-white">Case Description:</label>
-                <textarea class="w-full h-32 liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..."></textarea>
+                <textarea class="w-full h-32 liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..." id="form-description"></textarea>
             </div>
             <!-- Row 5: ADA Compliant -->
             <div class="flex items-center gap-3">
@@ -416,6 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Language Multi-Select with Dropdown
+const selectedLanguages = new Set();
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('language-container');
   const input = document.getElementById('language-input');
@@ -428,8 +429,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'Korean', 'German', 'Hindi', 'Urdu', 'Portuguese', 'Japanese', 
     'Italian', 'Russian', 'Polish', 'Tagalog', 'Thai', 'Farsi'
   ];
-  
-  const selectedLanguages = new Set();
   
   function createLanguageTag(language) {
     const tag = document.createElement('div');
@@ -557,4 +556,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderDropdown();
 });
 </script>
+<script src="scripts/requests.js" type="text/javascript" defer></script>
 </body></html>
