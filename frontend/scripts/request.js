@@ -31,7 +31,10 @@ const submitForm = async (event) => {
     const languages = Array.from(selectedLanguages);
     const description = document.getElementById("form-description").value;
     const ada = document.getElementById("ada").checked;  
+
+    document.getElementById("loading-overlay").classList.add("show");
     await findLawyer(city, caseType, minPrice, maxPrice, languages, description, ada);
+    document.getElementById("loading-overlay").classList.remove("show");
     window.location.href = "results.html";
 }
 
