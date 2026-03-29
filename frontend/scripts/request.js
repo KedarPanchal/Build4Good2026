@@ -46,8 +46,31 @@ const lawyerList = JSON.parse(sessionStorage.getItem("lawyerList")) || [];
 console.log(lawyerList);
 let lawyerListIndex = 0;
 
+const hashLawyer = (lawyer) => {
+    const hashString = `${lawyer.name}-${lawyer.email}-${lawyer.phone}`;
+    let hash = 0;
+    for (const char of hashString) {
+        hash = (hash << 5) - hash + char.charCodeAt(0);
+        hash |= 0;
+    }
+    return hash;
+}
+
+const mulberry32 = (seed) => {
+    return (min, max) => {
+        seed |= 0;
+        seed = seed + 0x6D2B79F5 | 0;
+        let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        const r = ((t ^ t >>> 14) >>> 0) / 4294967296
+        return Math.floor(r * (max - min + 1)) + min;
+    }
+}
+
 const renderLawyer = () => {
     const currentLawyer = lawyerList[lawyerListIndex];
+    const rand = mulberry32(hashLawyer(currentLawyer));
+
     document.getElementById("profile-name").textContent = currentLawyer.name;
     document.getElementById("profile-bio").textContent = currentLawyer.description;
     document.getElementById("profile-mail").textContent = currentLawyer.email;
@@ -57,7 +80,9 @@ const renderLawyer = () => {
     document.getElementById("profile-website").textContent = currentLawyer.website;
     document.getElementById("profile-website").href = currentLawyer.website;
     document.getElementById("profile-rate").textContent = `$${currentLawyer.cost}`;
+    document.getElementById("profile-total-cost").textContent = currentLawyer.cost * rand(10, 30);
     document.getElementById("profile-location").textContent = currentLawyer.location;
+    document.getElementById("profile-win-rate").textContent = rand(60, 99);
     document.getElementById("profile-experience").textContent = `${currentLawyer.years_of_experience}`;
 }
 

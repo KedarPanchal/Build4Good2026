@@ -184,9 +184,9 @@
         </button>
         <!-- Central Profile Card -->
         <div class="glass-card flex-grow h-full rounded-[2rem] flex flex-col overflow-hidden relative border border-white/5 shadow-2xl" id="profile-card">
-            <div class="flex-grow flex p-10 gap-10 overflow-hidden items-start">
+            <div class="flex-grow flex p-8 gap-8 overflow-hidden items-start">
                 <!-- Left Column: AI Bio + Contact Info -->
-                <div class="flex-[1.2] flex flex-col gap-6 overflow-y-auto pr-4 scrollbar-hide">
+                <div class="flex-[1.2] flex flex-col gap-5 overflow-y-auto pr-4 scrollbar-hide min-h-0">
                     <div class="space-y-4">
                         <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[9px] font-label font-bold uppercase tracking-[0.2em]">
                             <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
@@ -198,52 +198,68 @@
                         </p>
                     </div>
                     <!-- Contact Quick Actions -->
-                    <div class="grid grid-cols-1 gap-2">
-                        <div class="flex items-center gap-3 group p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-                            <span class="material-symbols-outlined p-1.5 rounded-lg bg-primary/10 text-primary text-base">mail</span>
-                            <div class="flex flex-col">
-                                <span class="text-[8px] text-slate-500 font-label uppercase tracking-widest">Email Address</span>
-                                <a href="mailto:j.doe@lex.ai" class="text-xs font-label text-slate-200 hover:text-primary transition-colors" id="profile-mail">j.doe@lex.ai</a>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="flex items-center gap-4 group py-3.5 px-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined shrink-0 p-2 rounded-lg bg-primary/10 text-primary text-xl">mail</span>
+                            <div class="flex flex-col gap-1 min-w-0 flex-1">
+                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Email Address</span>
+                                <a href="mailto:j.doe@lex.ai" class="text-sm font-label text-slate-200 hover:text-primary transition-colors break-all leading-snug" id="profile-mail">j.doe@lex.ai</a>
                             </div>
                         </div>
-                        <div class="flex items-center gap-3 group p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-                            <span class="material-symbols-outlined p-1.5 rounded-lg bg-primary/10 text-primary text-base">call</span>
-                            <div class="flex flex-col">
-                                <span class="text-[8px] text-slate-500 font-label uppercase tracking-widest">Phone Line</span>
-                                <a href="tel:+12125550198" class="text-xs font-label text-slate-200 hover:text-primary transition-colors" id="profile-phone">+1 (212)-555-0198</a>
+                        <div class="flex items-center gap-4 group py-3.5 px-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined shrink-0 p-2 rounded-lg bg-primary/10 text-primary text-xl">call</span>
+                            <div class="flex flex-col gap-1 min-w-0 flex-1">
+                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Phone Line</span>
+                                <a href="tel:+12125550198" class="text-sm font-label text-slate-200 hover:text-primary transition-colors leading-snug" id="profile-phone">+1 (212)-555-0198</a>
                             </div>
                         </div>
-                        <div class="flex items-center gap-3 group p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
-                            <span class="material-symbols-outlined p-1.5 rounded-lg bg-primary/10 text-primary text-base">public</span>
-                            <div class="flex flex-col">
-                                <span class="text-[8px] text-slate-500 font-label uppercase tracking-widest">Website</span>
-                                <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="text-xs font-label text-slate-200 hover:text-primary transition-colors" id="profile-website">www.johndoe.com</a>
+                        <div class="flex items-center gap-4 group py-3.5 px-3 rounded-xl hover:bg-white/5 transition-all cursor-pointer">
+                            <span class="material-symbols-outlined shrink-0 p-2 rounded-lg bg-primary/10 text-primary text-xl">public</span>
+                            <div class="flex flex-col gap-1 min-w-0 flex-1">
+                                <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Website</span>
+                                <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="text-sm font-label text-slate-200 hover:text-primary transition-colors break-all leading-snug" id="profile-website">www.johndoe.com</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Right Column: Reformatted Metrics -->
-                <div class="flex-[0.8] flex flex-col gap-3">
-                    <!-- Hourly Rate Block -->
-                    <div class="pt-4 pb-5 px-6 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
-                        <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Hourly Rate</span>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-primary font-headline font-bold text-3xl" id="profile-rate">$450</span>
-                            <span class="text-primary/50 font-label text-[10px] uppercase tracking-tighter">/ hr</span>
+                <div class="flex-[0.8] flex flex-col gap-2 min-w-0 shrink-0">
+                    <!-- Hourly Rate + Est. Total Cost -->
+                    <div class="pt-3 pb-3.5 px-5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-3">
+                        <div class="space-y-1">
+                            <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Hourly Rate</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-primary font-headline font-bold text-2xl sm:text-3xl" id="profile-rate">$450</span>
+                                <span class="text-primary/50 font-label text-[10px] uppercase tracking-tighter">/ hr</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/5 pt-3 space-y-1">
+                            <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Est. Total Cost</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-primary font-headline font-bold text-2xl sm:text-3xl" id="profile-total-cost">$12,400</span>
+                            </div>
                         </div>
                     </div>
                     <!-- Based In Block -->
-                    <div class="pt-4 pb-5 px-6 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                    <div class="pt-3 pb-3.5 px-5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
                         <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Based In</span>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-primary font-headline font-bold text-2xl" id="profile-location">New York, NY</span>
+                            <span class="text-primary font-headline font-bold text-xl sm:text-2xl leading-tight" id="profile-location">New York, NY</span>
+                        </div>
+                    </div>
+                    <!-- Lawyer Win Rate -->
+                    <div class="pt-3 pb-3.5 px-5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                        <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Lawyer Win Rate</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-primary font-headline font-bold text-2xl sm:text-3xl" id="profile-win-rate">78%</span>
+                            <span class="text-primary/50 font-label text-[10px] uppercase tracking-tighter">cases</span>
                         </div>
                     </div>
                     <!-- Experience Block -->
-                    <div class="pt-4 pb-5 px-6 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                    <div class="pt-3 pb-3.5 px-5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
                         <span class="text-[9px] text-slate-500 font-label uppercase tracking-widest">Experience</span>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-primary font-headline font-bold text-3xl" id="profile-experience">15+</span>
+                            <span class="text-primary font-headline font-bold text-2xl sm:text-3xl" id="profile-experience">15+</span>
                             <span class="text-primary/50 font-label text-[10px] uppercase tracking-tighter">Years</span>
                         </div>
                     </div>
