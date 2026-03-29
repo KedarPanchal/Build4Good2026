@@ -72,6 +72,93 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.show {
+            display: flex;
+        }
+        .liquid-input {
+            background: rgba(2, 12, 27, 0.6) !important;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        .liquid-input:focus {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+            outline: none;
+        }
+
+        .biz-card-container {
+            perspective: 1000px;
+            width: 480px;
+            height: 280px;
+        }
+        .biz-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .biz-card.flipped {
+            transform: rotateY(180deg);
+        }
+        .biz-card-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            background: linear-gradient(145deg, #112240, #0a192f);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(212, 175, 55, 0.06);
+        }
+        .biz-card-face::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                130deg,
+                rgba(212, 175, 55, 0.04) 0%,
+                transparent 40%,
+                transparent 60%,
+                rgba(212, 175, 55, 0.02) 100%
+            );
+            pointer-events: none;
+        }
+        .biz-card-back {
+            transform: rotateY(180deg);
+        }
+        .biz-input {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            color: #D4AF37;
+            width: 100%;
+            padding: 0;
+            font-family: 'Manrope', sans-serif;
+            caret-color: #D4AF37;
+        }
+        .biz-input:focus {
+            color: #f2cf66;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .biz-input::placeholder {
+            color: rgba(212, 175, 55, 0.35);
+        }
     </style>
 </head>
 <body class="bg-background selection:bg-primary/30 h-screen overflow-hidden">
@@ -154,7 +241,7 @@
             </div>
             <!-- Footer Contact Button -->
             <div class="flex justify-center pb-12">
-            <button class="bg-primary w-64 h-14 rounded-xl text-black font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+            <button onclick="document.getElementById('contact-modal').classList.add('show')" class="bg-primary w-64 h-14 rounded-xl text-black font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-black uppercase tracking-widest flex items-center justify-center gap-2">
                 <span class="material-symbols-outlined text-xl">mail</span>
                 Contact
                 </button>
@@ -187,5 +274,79 @@
 <div class="fixed bottom-0 left-0 -z-10 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
 
 <script src="scripts/request.js" type="text/javascript" defer></script>
+<!-- Contact Modal -->
+<div class="modal-overlay" id="contact-modal">
+<div class="flex flex-col items-center gap-6">
+<!-- Business Card -->
+<div class="biz-card-container">
+<div class="biz-card" id="biz-card">
+<!-- Front Face: Contact Info -->
+<div class="biz-card-face flex flex-col justify-between p-8">
+<div class="flex flex-col gap-4">
+<input class="biz-input text-2xl font-headline font-bold" placeholder="Your Name" type="text" id="biz-name"/>
+<input class="biz-input text-sm" placeholder="you@example.com" type="email" id="biz-email"/>
+<input class="biz-input text-sm" placeholder="+1 (555) 000-0000" type="tel" id="biz-phone"/>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-[9px] text-slate-600 font-label uppercase tracking-widest select-none">Front</span>
+<button type="button" class="flip-btn flex items-center gap-1 text-slate-500 hover:text-white transition-colors cursor-pointer select-none" id="flip-to-back">
+<span class="text-[10px] font-label uppercase tracking-widest">Message</span>
+<span class="material-symbols-outlined text-base">flip</span>
+</button>
+</div>
+</div>
+<!-- Back Face: Message -->
+<div class="biz-card-face biz-card-back flex flex-col p-8">
+<textarea class="biz-input flex-grow resize-none text-sm" placeholder="Write your message here..." id="biz-message"></textarea>
+<div class="flex justify-between items-end mt-4">
+<span class="text-[9px] text-slate-600 font-label uppercase tracking-widest select-none">Back</span>
+<button type="button" class="flip-btn flex items-center gap-1 text-slate-500 hover:text-white transition-colors cursor-pointer select-none" id="flip-to-front">
+<span class="text-[10px] font-label uppercase tracking-widest">Details</span>
+<span class="material-symbols-outlined text-base">flip</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Buttons below card -->
+<form class="flex justify-center items-center gap-4" id="contact-form">
+<button onclick="closeContactModal()" class="px-6 py-3 rounded-xl border border-outline-variant text-white font-headline font-bold hover:bg-white/5 transition-all text-xs uppercase tracking-widest" type="button">
+Cancel
+</button>
+<button class="bg-primary px-6 py-3 rounded-xl text-black font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-lg">send</span>
+Send
+</button>
+</form>
+</div>
+</div>
+<script>
+const modal = document.getElementById('contact-modal');
+const card = document.getElementById('biz-card');
+
+function closeContactModal() {
+  modal.classList.remove('show');
+  card.classList.remove('flipped');
+}
+
+// Flip buttons
+document.getElementById('flip-to-back').addEventListener('click', () => {
+  card.classList.add('flipped');
+});
+document.getElementById('flip-to-front').addEventListener('click', () => {
+  card.classList.remove('flipped');
+});
+
+// Close on overlay click
+modal.addEventListener('click', function(e) {
+  if (e.target === this) closeContactModal();
+});
+
+// Form submit
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  closeContactModal();
+});
+</script>
 </body>
 </html>
