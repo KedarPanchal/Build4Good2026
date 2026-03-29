@@ -205,13 +205,13 @@
             <div class="flex flex-col gap-4">
                 <div class="space-y-2">
                     <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">City:</label>
-                    <input class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body placeholder:text-outline/30" placeholder="e.g. Houston, TX" type="text"/>
+                    <input class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body placeholder:text-outline/30" placeholder="e.g. Houston, TX" type="text" id="form-city"/>
                 </div>
                 <div class="space-y-2">
                     <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">Case Type:</label>
                     <div class="relative">
-                        <select class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body appearance-none cursor-pointer">
-                            <option value="">Select a case type...</option>
+                        <select class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body appearance-none cursor-pointer" id="form-case-type">
+                            <option>Select a case type...</option>
                             <option>Accidents and Injuries</option>
                             <option>Alternative Dispute Resolution</option>
                             <option>Antitrust</option>
@@ -269,7 +269,7 @@
             <!-- Right column: Case Description (stretches to match left) -->
             <div class="flex flex-col space-y-2">
                 <label class="block font-headline font-bold text-sm text-white">Case Description:</label>
-                <textarea class="w-full flex-grow liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..."></textarea>
+                <textarea class="w-full flex-grow liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..." id="form-description"></textarea>
             </div>
         </div>
         <!-- Row 2: Price (Dual-node slider) -->
@@ -330,24 +330,6 @@
 <app-footer></app-footer>
 
 <script>
-// Prevent form submission on Enter key (except when clicking Search button)
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('search-form');
-  
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Handle search logic here when Search button is clicked
-    console.log('Search submitted');
-  });
-  
-  // Prevent Enter key from submitting form in input fields
-  form.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.type !== 'submit') {
-      e.preventDefault();
-    }
-  });
-});
-
 // Dual Range Slider Implementation
 document.addEventListener('DOMContentLoaded', () => {
   const slider = document.querySelector('.dual-range-slider');
@@ -621,5 +603,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderDropdown();
 });
 </script>
-<script src="scripts/requests.js" type="text/javascript" defer></script>
+<script src="scripts/request.js" type="text/javascript" defer></script>
 </body></html>

@@ -1,8 +1,9 @@
 let lawyerList = [];
 let lawyerListIndex = 0;
+console.log("Request.js loaded");
 
 const findLawyer = async (city, caseType, minPrice, maxPrice, languages, description, ada) => {
-    fetch("http://localhost:5678/webhook/findlawyer", {
+    const response = await fetch("http://localhost:5678/webhook/findlawyer", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -16,17 +17,17 @@ const findLawyer = async (city, caseType, minPrice, maxPrice, languages, descrip
             disabilityFocused: ada,
             description: description,
         }),
-    })
-        .then(response => response.json())
-        .then(json => lawyerList = json.lawyers);
+    });
+    const json = await response.json();  
+    lawyerList = json.lawyers;
 };
 
 const submitForm = async (event) => {
     event.preventDefault();
     const city = document.getElementById("form-city").value;
     const caseType = document.getElementById("form-case-type").value;
-    const minPrice = document.getElementById("price-min-input").value;
-    const maxPrice = document.getElementById("price-max-input").value;
+    const minPrice = Number(document.getElementById("price-min-input").value);
+    const maxPrice = Number(document.getElementById("price-max-input").value);
     const languages = Array.from(selectedLanguages);
     const description = document.getElementById("form-description").value;
     const ada = document.getElementById("ada").checked;  
@@ -34,7 +35,10 @@ const submitForm = async (event) => {
     window.location.href = "results.html";
 }
 
-document.getElementById("search-form").addEventListener("submit", submitForm);
+const form = document.getElementById("search-form");
+if (form) {
+    form.addEventListener("submit", submitForm);
+}
 
 const renderLawyer = () => {
     const currentLawyer = lawyerList[lawyerListIndex];
