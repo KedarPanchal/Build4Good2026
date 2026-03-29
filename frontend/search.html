@@ -103,6 +103,22 @@
         outline: none;
       }
       
+      /* Force dark background on all inputs */
+      input.liquid-input {
+        background: rgba(2, 12, 27, 0.6) !important;
+      }
+      
+      /* Hide number input arrows/spinners */
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+      }
+      
       .dual-range-slider {
         position: relative;
         height: 6px;
@@ -182,20 +198,65 @@
 <div class="w-full max-w-3xl liquid-glass rounded-[2rem] p-8 md:p-10 relative z-10 shadow-2xl">
 <button onclick="window.location.href='index.html'" class="absolute top-6 left-6 material-symbols-outlined text-on-surface-variant hover:text-white transition-colors cursor-pointer">close</button>
 <form class="space-y-8 mt-4" id="search-form">
-<!-- Row 1: City and Case Type -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 <div class="space-y-2">
 <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">City:</label>
-<input class="w-full liquid-input rounded-xl py-3 px-4 text-black font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
+<input class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
 </div>
 <div class="space-y-2">
 <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">Case Type:</label>
 <div class="relative">
 <select class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body appearance-none cursor-pointer">
+<option value="">Select a case type...</option>
+<option>Accidents and Injuries</option>
+<option>Alternative Dispute Resolution</option>
+<option>Antitrust</option>
+<option>Arbitration</option>
+<option>Aviation/Airplanes</option>
+<option>Bankruptcy/Debt</option>
+<option>Business</option>
+<option>Charities/Non-Profits</option>
+<option>Civil Case Appeals</option>
+<option>Civil Rights</option>
+<option>Consumer</option>
+<option>Criminal Case Appeals</option>
+<option>Criminal Defense</option>
+<option>Death: Wills, Estates, Probate</option>
+<option>Death: Wrongful Death</option>
+<option>Disabilities/ADA</option>
+<option>Divorce and Family Law</option>
+<option>DUI/DWI</option>
+<option>Education/Schools</option>
+<option>Employment</option>
+<option>Employment: Workers' Compensation</option>
+<option>Entertainment/Sports</option>
+<option>Estates and Probate</option>
+<option>Finance Foreclosure</option>
+<option>Foundations/Trusts</option>
+<option>Gender Identification/Human Sexuality</option>
+<option>Government Administration</option>
+<option>Government Legislation</option>
+<option>Health Care</option>
+<option>Immigration</option>
 <option>Intellectual Property</option>
-<option>Corporate Litigation</option>
-<option>Digital Privacy</option>
-<option>AI Governance</option>
+<option>Insurance</option>
+<option>International Law</option>
+<option>Landlord/Tenant</option>
+<option>Law Office Management</option>
+<option>Lawsuits/Trials/Litigation</option>
+<option>Mediation</option>
+<option>Military/Armed Forces</option>
+<option>Oil and Gas Leases</option>
+<option>Open Records/Freedom of Information</option>
+<option>Patents/Trademarks/Copyrights</option>
+<option>Property Rights</option>
+<option>Public Utilities</option>
+<option>Real Estate</option>
+<option>Senior/Elder Issues</option>
+<option>Tax</option>
+<option>Technology</option>
+<option>Traffic Tickets</option>
+<option>Trusts</option>
 </select>
 <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
 </div>
@@ -208,14 +269,14 @@
 <div class="flex items-center gap-3">
 <div class="flex items-center gap-2">
 <span class="text-slate-500 text-xs">$</span>
-<input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-black text-xs text-center focus:outline-none" id="price-min-input" min="50" max="1000" type="number" value="250"/>
+<input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-white text-xs text-center focus:outline-none" id="price-min-input" min="50" max="1000" type="number" value="250"/>
 </div>
 <span class="text-slate-500 text-xs">—</span>
 <div class="flex items-center gap-2">
 <span class="text-slate-500 text-xs">$</span>
-<input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-black text-xs text-center focus:outline-none" id="price-max-input" min="50" max="1000" type="number" value="850"/>
+<input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-white text-xs text-center focus:outline-none" id="price-max-input" min="50" max="1000" type="number" value="850"/>
 </div>
-<span class="text-slate-500 text-[10px]">/ hr</span>
+<span class="text-slate-500 text-[15px]">/ hr</span>
 </div>
 </div>
 <div class="px-2 py-4">
@@ -290,9 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const maxInput = document.getElementById('price-max-input');
   
   // Price range configuration (in dollars per hour)
-  const MIN_PRICE = 50;
+  const MIN_PRICE = 0;
   const MAX_PRICE = 1000;
-  const MIN_RANGE = 25; // Minimum difference between min and max must be at least $25
+  const MIN_RANGE = 5; // Minimum difference between min and max must be at least $5
   
   let minPrice = 250; // Initial min price
   let maxPrice = 850; // Initial max price
