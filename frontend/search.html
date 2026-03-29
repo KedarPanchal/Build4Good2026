@@ -173,95 +173,97 @@
 <body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col">
 <!-- TopNavBar -->
 <app-header></app-header>
+
 <!-- Main Content Area -->
 <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6 relative overflow-visible">
-<!-- Abstract Background Glows -->
-<div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
-<div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
-<!-- Central Search Card -->
-<div class="w-full max-w-3xl liquid-glass rounded-[2rem] p-8 md:p-10 relative z-10 shadow-2xl">
-<button onclick="window.location.href='index.html'" class="absolute top-6 left-6 material-symbols-outlined text-on-surface-variant hover:text-white transition-colors cursor-pointer">close</button>
-<form class="space-y-8 mt-4" id="search-form">
-<!-- Row 1: City and Case Type -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<div class="space-y-2">
-<label class="block font-headline font-bold text-sm text-white flex items-center gap-2">City:</label>
-<input class="w-full liquid-input rounded-xl py-3 px-4 text-black font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="block font-headline font-bold text-sm text-white flex items-center gap-2">Case Type:</label>
-<div class="relative">
-<select class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body appearance-none cursor-pointer">
-<option>Intellectual Property</option>
-<option>Corporate Litigation</option>
-<option>Digital Privacy</option>
-<option>AI Governance</option>
-</select>
-<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
-</div>
-</div>
-</div>
-<!-- Row 2: Price (Dual-node slider) -->
-<div class="space-y-4">
-<div class="flex justify-between items-center mb-4">
-<label class="font-headline font-bold text-sm text-white">Price:</label>
-<div class="flex items-center gap-3">
-<div class="flex items-center gap-2">
-<span class="text-slate-500 text-xs">$</span>
-<input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-black text-xs text-center focus:outline-none" id="price-min-input" min="50" max="1000" type="number" value="250"/>
-</div>
-<span class="text-slate-500 text-xs">—</span>
-<div class="flex items-center gap-2">
-<span class="text-slate-500 text-xs">$</span>
-<input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-black text-xs text-center focus:outline-none" id="price-max-input" min="50" max="1000" type="number" value="850"/>
-</div>
-<span class="text-slate-500 text-[10px]">/ hr</span>
-</div>
-</div>
-<div class="px-2 py-4">
-<div class="dual-range-slider">
-<div class="track-fill"></div>
-<div class="thumb" style="left: 20%;"></div>
-<div class="thumb" style="left: 60%;"></div>
-</div>
-</div>
-</div>
-<!-- Row 3: Languages (Multi-select) -->
-<div class="space-y-2 relative">
-<label class="block font-headline font-bold text-sm text-white">Languages:</label>
-<div class="w-full liquid-input rounded-xl p-2 flex flex-wrap gap-2 items-center min-h-[50px] cursor-text" id="language-container">
-<input class="bg-transparent border-none focus:ring-0 text-white font-body text-sm flex-grow placeholder:text-outline/30 min-w-[120px] focus:outline-none" id="language-input" placeholder="Type or select languages..." type="text"/>
-<span class="material-symbols-outlined text-on-surface-variant ml-auto mr-2 cursor-pointer select-none" id="language-dropdown-toggle">expand_more</span>
-</div>
-<div class="language-dropdown" id="language-dropdown">
-<!-- Options will be populated by JavaScript -->
-</div>
-</div>
-<!-- Row 4: Case Description -->
-<div class="space-y-2">
-<label class="block font-headline font-bold text-sm text-white">Case Description:</label>
-<textarea class="w-full h-32 liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..."></textarea>
-</div>
-<!-- Row 5: ADA Compliant -->
-<div class="flex items-center gap-3">
-<label class="font-headline font-bold text-sm text-white">ADA Compliant:</label>
-<input class="w-5 h-5 rounded border-primary/30 bg-surface-container-lowest text-primary focus:ring-primary focus:ring-offset-background transition-all" id="ada" type="checkbox"/>
-</div>
-<!-- Footer of the card -->
-<div class="flex justify-end items-center gap-4 pt-4 border-t border-outline-variant/10">
-<button onclick="window.location.href='index.html'" class="w-44 h-12 rounded-xl border border-outline-variant text-white font-headline font-bold hover:bg-white/5 transition-all text-xs uppercase tracking-widest" type="button">
+    <!-- Abstract Background Glows -->
+    <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+    <!-- Central Search Card -->
+    <div class="w-full max-w-3xl liquid-glass rounded-[2rem] p-8 md:p-10 relative z-10 shadow-2xl">
+        <button onclick="window.location.href='index.html'" class="absolute top-6 left-6 material-symbols-outlined text-on-surface-variant hover:text-white transition-colors cursor-pointer">close</button>
+        <form class="space-y-8 mt-4" id="search-form">
+            <!-- Row 1: City and Case Type -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-2">
+                    <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">City:</label>
+                    <input class="w-full liquid-input rounded-xl py-3 px-4 text-black font-body placeholder:text-outline/30" placeholder="e.g. New York, NY" type="text"/>
+                </div>
+                <div class="space-y-2">
+                    <label class="block font-headline font-bold text-sm text-white flex items-center gap-2">Case Type:</label>
+                    <div class="relative">
+                        <select class="w-full liquid-input rounded-xl py-3 px-4 text-white font-body appearance-none cursor-pointer">
+                            <option>Intellectual Property</option>
+                            <option>Corporate Litigation</option>
+                            <option>Digital Privacy</option>
+                            <option>AI Governance</option>
+                        </select>
+                        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Row 2: Price (Dual-node slider) -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-center mb-4">
+                    <label class="font-headline font-bold text-sm text-white">Price:</label>
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-slate-500 text-xs">$</span>
+                            <input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-black text-xs text-center focus:outline-none" id="price-min-input" min="50" max="1000" type="number" value="250"/>
+                        </div>
+                        <span class="text-slate-500 text-xs">—</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-slate-500 text-xs">$</span>
+                            <input class="liquid-input w-20 rounded-lg py-1.5 px-2 text-black text-xs text-center focus:outline-none" id="price-max-input" min="50" max="1000" type="number" value="850"/>
+                        </div>
+                        <span class="text-slate-500 text-[10px]">/ hr</span>
+                    </div>
+                </div>
+                <div class="px-2 py-4">
+                    <div class="dual-range-slider">
+                        <div class="track-fill"></div>
+                        <div class="thumb" style="left: 20%;"></div>
+                        <div class="thumb" style="left: 60%;"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Row 3: Languages (Multi-select) -->
+            <div class="space-y-2 relative">
+                <label class="block font-headline font-bold text-sm text-white">Languages:</label>
+                <div class="w-full liquid-input rounded-xl p-2 flex flex-wrap gap-2 items-center min-h-[50px] cursor-text" id="language-container">
+                    <input class="bg-transparent border-none focus:ring-0 text-white font-body text-sm flex-grow placeholder:text-outline/30 min-w-[120px] focus:outline-none" id="language-input" placeholder="Type or select languages..." type="text"/>
+                    <span class="material-symbols-outlined text-on-surface-variant ml-auto mr-2 cursor-pointer select-none" id="language-dropdown-toggle">expand_more</span>
+                </div>
+                <div class="language-dropdown" id="language-dropdown">
+                <!-- Options will be populated by JavaScript -->
+                </div>
+            </div>
+            <!-- Row 4: Case Description -->
+            <div class="space-y-2">
+                <label class="block font-headline font-bold text-sm text-white">Case Description:</label>
+                <textarea class="w-full h-32 liquid-input rounded-xl p-4 text-white font-body placeholder:text-outline/30 resize-none text-sm" placeholder="Describe the legal challenge in detail..."></textarea>
+            </div>
+            <!-- Row 5: ADA Compliant -->
+            <div class="flex items-center gap-3">
+                <label class="font-headline font-bold text-sm text-white">ADA Compliant:</label>
+                <input class="w-5 h-5 rounded border-primary/30 bg-surface-container-lowest text-primary focus:ring-primary focus:ring-offset-background transition-all" id="ada" type="checkbox"/>
+            </div>
+            <!-- Footer of the card -->
+            <div class="flex justify-end items-center gap-4 pt-4 border-t border-outline-variant/10">
+                <button onclick="window.location.href='index.html'" class="w-44 h-12 rounded-xl border border-outline-variant text-white font-headline font-bold hover:bg-white/5 transition-all text-xs uppercase tracking-widest" type="button">
                     Cancel
                 </button>
-<button class="bg-primary w-44 h-12 rounded-xl text-on-primary-fixed font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-2" type="submit">
-<span class="material-symbols-outlined text-lg">search</span>
+                <button class="bg-primary w-44 h-12 rounded-xl text-on-primary-fixed font-headline font-extrabold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-xs uppercase tracking-widest flex items-center justify-center gap-2" type="submit">
+                    <span class="material-symbols-outlined text-lg">search</span>
                     Search
                 </button>
-</div>
-</form>
-</div>
+            </div>
+        </form>
+    </div>
 </main>
 <!-- Footer -->
 <app-footer></app-footer>
+
 <script>
 // Prevent form submission on Enter key (except when clicking Search button)
 document.addEventListener('DOMContentLoaded', () => {
